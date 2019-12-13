@@ -62,7 +62,7 @@ try {
                 description: description,
                 date: date,
                 pictureId: 'p'+index,
-                pictureUrl: 'https://i-remember.azurewebsites.net/'+fileName
+                pictureUrl: 'https://i-remember.azurewebsites.net/memoryImage/'+fileName
             };
             console.log(memory);
             memoriesService.addMemory(memory);
