@@ -49,7 +49,7 @@ try {
             file.type = 'image/png';
             file.name = index + '.png';
             filePath = file.path;
-            fileName = file.name;
+            fileName = 'memory'+ file.name;
             console.log(file);
             index = uuid();
         });
