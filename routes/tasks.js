@@ -133,8 +133,15 @@ const getTasksByDayMongoose = async (day,res) => {
     })
 }
 
+const deleteTaskMongoose = async (id,taskObject) => {
+    const promise =  tasksModel.deleteOne({id: id},taskObject, err => {
+        if (err) throw new Error();
+    });
+}
+
 exports.addTask = addMongoose;
 exports.getAll = getAllMongoose;
 exports.setDone=setDoneMongoose;
 exports.setUndone=setUndoneMongoose;
 exports.getByDay=getTasksByDayMongoose;
+exports.deleteTask=deleteTaskMongoose;

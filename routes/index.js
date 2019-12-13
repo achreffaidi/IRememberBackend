@@ -8,6 +8,7 @@ const uuid = require('uuid/v4');
 const env = require('dotenv').config();
 const speech = require('./speech');
 const tasksService = require('./tasks');
+const memoriesService = require('./memories');
 
 
 
@@ -17,7 +18,103 @@ var index = uuid();
 
 
 
+router.get('/memories', function(req, res, next) {
 
+    memoriesService.getAllMemories(res);
+
+});
+
+router.post('/memories/add', function(req, res, next) {
+
+try {
+
+    var  {title,description,date} = req.headers;
+
+    console.log(req.body);
+
+
+
+
+        var filePath;
+        var fileName;
+        var form = new formidable.IncomingForm();
+        form.uploadDir = './uploads';
+        form.keepExtensions = true;
+        form.type = true;
+        form.on('fileBegin', function (name, file) {
+            const extentionTab = file.type.split('/');
+            const extention = extentionTab[1];
+          //  file.path = __dirname + '\\..\\memories\\' + 'memory' + index + '.png';//+ extention;
+            file.path = 'D:/home/site/wwwroot/memories/'+'memory' + index + '.png';//+ extention;
+            file.type = 'image/png';
+            file.name = index + '.png';
+            filePath = file.path;
+            fileName = file.name;
+            console.log(file);
+            index = uuid();
+        });
+        form.parse(req, (err, fields, files) => {
+
+            if (err) throw err;
+
+            const memory = {
+                title: title,
+                description: description,
+                date: date,
+                pictureId: 'p'+index,
+                pictureUrl: 'https://i-remember.azurewebsites.net/'+fileName
+            };
+            console.log(memory);
+            memoriesService.addMemory(memory);
+            index = uuid();
+            res.statusCode=200;
+            res.send();
+        });
+
+
+
+
+}catch (e) {
+    console.log(e.message);
+    res.statusCode=400;
+    res.send();
+}
+    });
+
+
+router.get('/memoryImage/:fileName',  (req,res) => {
+
+    const {fileName} = req.params;
+
+    if(!fileName){
+        res.statusCode = 404;
+        res.send('');
+        return 0;
+    }
+
+    const uploadsDir = path.join('D:/home/site/wwwroot/memories');
+   // const uploadsDir = path.join('../memories');
+    console.log(uploadsDir);
+    fs.readdir(uploadsDir, (err, files) => {
+        if(err) {
+            return res.send('No files found');
+        }
+        let name = false;
+
+        files.forEach( (file, key) => {
+            if ( file === fileName  ) name = file;
+        });
+
+        if( !name )
+            res.send('File not found');
+        else
+            res.sendFile(name, { root: uploadsDir }, (err) => {
+                if (err) throw err;
+            } )
+
+
+    })
+});
 
 
 router.get('/memories', function(req, res, next) {
@@ -56,67 +153,6 @@ router.get('/memories', function(req, res, next) {
     res.json(object);
 });
 
-
-
-
-/*
-
-/* GET home page.
-router.get('/', function(req, res, next) {
-
-
-// Replace <Subscription Key> with cognitive.microsoft.com/face/v1.0/detect';your valid subscription key.
-    const subscriptionKey = 'e1be494ef3dc45cea5fe96cee8cbcec9';
-
-// You must use the same location in your REST call as you used to get your
-// subscription keys. For example, if you got your subscription keys from
-// westus, replace "westcentralus" in the URL below with "westus".
-    const uriBase = 'https://westcentralus.api.
-    const imageUrl =
-        'https://upload.wikimedia.org/wikipedia/commons/3/37/Dagestani_man_and_woman.jpg';
-
-// Request parameters.
-    const params = {
-        'returnFaceId': 'true',
-        'returnFaceLandmarks': 'false',
-        'returnFaceAttributes': 'age,gender,headPose,smile,facialHair,glasses,' +
-            'emotion,hair,makeup,occlusion,accessories,blur,exposure,noise'
-    };
-
-
-
-    const options = {
-        uri: uriBase,
-        qs: params,
-        body: '{"url": ' + '"' + imageUrl + '"}',
-        headers: {
-            'Content-Type': 'application/json',
-            'Ocp-Apim-Subscription-Key' : subscriptionKey
-        }
-    };
-
-    let person = {per: 'yes'};
-    request.post(options, (error, response, body) => {
-
-        if (body) {
-            console.log(body);
-            person = body;
-        }
-
-        if (error) {
-            console.log('Error: ', error);
-            return;
-        }
-        let jsonResponse = JSON.stringify(JSON.parse(body), null, '  ');
-        console.log('JSON Response\n');
-        console.log(jsonResponse);
-    });
-
-res.json(person);
-
-});
-
-*/
 
 
 
@@ -662,6 +698,24 @@ router.get('/setUndone/:id', function(req, res, next) {
     }
     else{
         tasksService.setUndone(id);
+        res.statusCode=200;
+        res.send();
+    }
+
+});
+
+
+router.post('/delete/:id', function(req, res, next) {
+
+
+    const {id} = req.params;
+
+    if(!id){
+        res.statusCode = 400;
+        re.send();
+    }
+    else{
+        tasksService.deleteTask(id);
         res.statusCode=200;
         res.send();
     }
