@@ -139,9 +139,6 @@ router.get('/image/:fileName',  (req,res) => {
         }
         let name = false;
 
-
-        console.log(files);
-
         files.forEach( (file, key) => {
             if ( file === fileName  ) name = file;
         });
