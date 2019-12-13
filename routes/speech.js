@@ -9,8 +9,7 @@ const readline = require('readline-sync');
 const xmlbuilder = require('xmlbuilder');
 const env = require('dotenv').config();
 var uuid = require('uuid');
-var azure = require('azure-storage');
-var blobService = azure.createBlobService('bioit', 'sLP/I+G57qaGEz73Pjuv7/XP/0MiRgMb1mqUlMTMV/rHtTYsWA4D9ZL1LaPRzyZUkPS4NhIoSzC9wHCXkDvvjg==');
+
 
 
 var index = uuid();

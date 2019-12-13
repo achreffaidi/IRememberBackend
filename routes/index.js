@@ -4,11 +4,10 @@ const fs = require('fs');
 var formidable = require('formidable');
 const path = require('path');
 const request = require('request');
-var azure = require('azure-storage');
-var blobService = azure.createBlobService('bioit', 'sLP/I+G57qaGEz73Pjuv7/XP/0MiRgMb1mqUlMTMV/rHtTYsWA4D9ZL1LaPRzyZUkPS4NhIoSzC9wHCXkDvvjg==');
 const uuid = require('uuid/v4');
 const env = require('dotenv').config();
 const speech = require('./speech');
+const tasksService = require('./tasks');
 
 
 
@@ -577,360 +576,7 @@ router.get('/identify', function(req, res, next) {
     });
 });
 
-var tasks =  [
-    {
-        "id":"23",
-        "time":"10:00",
-        "day":'1',
-        "done":false,
-        "title":"Take your treatment medicines",
-    },
-    {
-        "id":"29",
-        "time":"10:00",
-        "day":'2',
-        "done":false,
-        "title":"Take your treatment medicines",
-    },
-    {
-        "id":"28",
-        "time":"10:00",
-        "day":'3',
-        "done":true,
-        "title":"Take your treatment medicines",
-    },
-    {
-        "id":"27",
-        "time":"10:00",
-        "day":'4',
-        "done":true,
-        "title":"Take your treatment medicines",
-    },
-    {
-        "id":"26",
-        "time":"10:00",
-        "day":'5',
-        "done":true,
-        "title":"Take your treatment medicines",
-    },
-    {
-        "id":"25",
-        "time":"10:00",
-        "day":'6',
-        "done":true,
-        "title":"Take your treatment medicines",
-    },
-    {
-        "id":"24",
-        "time":"10:00",
-        "day":'0',
-        "done":true,
-        "title":"Take your treatment medicines",
-    },
-    {
-        "id":"44",
-        "time":"11:30",
-        "day":'1',
-        "done":true,
-        "title":"Take your pre-lunch medicines",
-    },
-    {
-        "id":"45",
-        "time":"11:30",
-        "day":'2',
-        "done":true,
-        "title":"Take your pre-lunch medicines",
-    },
-    {
-        "id":"46",
-        "time":"11:30",
-        "day":'3',
-        "done":true,
-        "title":"Take your pre-lunch medicines",
-    },
-    {
-        "id":"47",
-        "time":"11:30",
-        "day":'4',
-        "done":true,
-        "title":"Take your pre-lunch medicines",
-    },
-    {
-        "id":"48",
-        "time":"11:30",
-        "day":'5',
-        "done":true,
-        "title":"Take your pre-lunch medicines",
-    },
-    {
-        "id":"49",
-        "time":"11:30",
-        "day":'6',
-        "done":true,
-        "title":"Take your pre-lunch medicines",
-    },
-    {
-        "id":"50",
-        "time":"11:30",
-        "day":'0',
-        "done":true,
-        "title":"Take your pre-lunch medicines",
-    },
-    {
-        "id":"37",
-        "time":"12h",
-        "day":'1',
-        "done":true,
-        "title":"Take your lunch",
-    },
-    {
-        "id":"43",
-        "time":"12h",
-        "day":'2',
-        "done":true,
-        "title":"Take your lunch",
-    },
-    {
-        "id":"42",
-        "time":"12h",
-        "day":'3',
-        "done":true,
-        "title":"Take your lunch",
-    },
-    {
-        "id":"41",
-        "time":"12h",
-        "day":'4',
-        "done":true,
-        "title":"Take your lunch",
-    },
-    {
-        "id":"40",
-        "time":"12h",
-        "day":'5',
-        "done":true,
-        "title":"Take your lunch",
-    },
-    {
-        "id":"39",
-        "time":"12h",
-        "day":'6',
-        "done":true,
-        "title":"Take your lunch",
-    },
-    {
-        "id":"38",
-        "time":"12h",
-        "day":'0',
-        "done":true,
-        "title":"Take your lunch",
-    },
 
-    {
-        "id":"1",
-        "time":"15:30",
-        "day":'1',
-        "done":false,
-        "title":"Take vitamine C ",
-    },
-    {
-        "id":"2",
-        "time":"14:00",
-        "day":'1',
-        "done":true,
-        "title":"Take a shower",
-    },
-    {
-        "id":"3",
-        "time":"16:00",
-        "day":'2',
-        "done":false,
-        "title":"Take aspirine",
-    },
-    {
-        "id":"8",
-        "time":"15:30",
-        "day":'2',
-        "done":false,
-        "title":"Take vitamine C ",
-    },
-    {
-        "id":"9",
-        "time":"15:30",
-        "day":'3',
-        "done":false,
-        "title":"Take vitamine C ",
-    },
-    {
-        "id":"4",
-        "time":"15:30",
-        "day":'4',
-        "done":false,
-        "title":"Take vitamine C ",
-    },
-    {
-        "id":"5",
-        "time":"15:30",
-        "day":'5',
-        "done":false,
-        "title":"Take vitamine C ",
-    },
-    {
-        "id":"6",
-        "time":"15:30",
-        "day":'6',
-        "done":false,
-        "title":"Take vitamine C ",
-    },
-    {
-        "id":"7",
-        "time":"15:30",
-        "day":'0',
-        "done":false,
-        "title":"Take vitamine C ",
-    },
-    {
-        "id":"10",
-        "time":"14:00",
-        "day":'1',
-        "done":false,
-        "title":"Take a shower",
-    },
-    {
-        "id":"11",
-        "time":"14:00",
-        "day":'3',
-        "done":false,
-        "title":"Take a shower",
-    },
-    {
-        "id":"12",
-        "time":"14:00",
-        "day":'4',
-        "done":false,
-        "title":"Take a shower",
-    },
-    {
-        "id":"13",
-        "time":"14:00",
-        "day":'5',
-        "done":false,
-        "title":"Take a shower",
-    },
-    {
-        "id":"14",
-        "time":"14:00",
-        "day":'6',
-        "done":false,
-        "title":"Take a shower",
-    },
-    {
-        "id":"15",
-        "time":"14:00",
-        "day":'0',
-        "done":false,
-        "title":"Take a shower",
-    },
-    {
-        "id":"16",
-        "time":"17:00",
-        "day":'1',
-        "done":false,
-        "title":"Do some stretching exercices",
-    },
-    {
-        "id":"17",
-        "time":"17:00",
-        "day":'2',
-        "done":false,
-        "title":"Do some stretching exercices",
-    },
-    {
-        "id":"18",
-        "time":"17:00",
-        "day":'3',
-        "done":false,
-        "title":"Do some stretching exercices",
-    },
-    {
-        "id":"19",
-        "time":"17:00",
-        "day":'4',
-        "done":false,
-        "title":"Do some stretching exercices",
-    },
-    {
-        "id":"20",
-        "time":"17:00",
-        "day":'5',
-        "done":false,
-        "title":"Do some stretching exercices",
-    },
-    {
-        "id":"21",
-        "time":"17:00",
-        "day":'6',
-        "done":false,
-        "title":"Do some stretching exercices",
-    },
-    {
-        "id":"22",
-        "time":"17:00",
-        "day":'0',
-        "done":false,
-        "title":"Do some stretching exercices",
-    },
-    {
-        "id":"30",
-        "time":"19:00",
-        "day":'1',
-        "done":false,
-        "title":"Take your dinner",
-    },
-    {
-        "id":"31",
-        "time":"19:00",
-        "day":'2',
-        "done":false,
-        "title":"Take your dinner",
-    },
-    {
-        "id":"32",
-        "time":"19:00",
-        "day":'3',
-        "done":false,
-        "title":"Take your dinner",
-    },{
-        "id":"33",
-        "time":"19:00",
-        "day":'4',
-        "done":false,
-        "title":"Take your dinner",
-    },
-    {
-        "id":"34",
-        "time":"19:00",
-        "day":'5',
-        "done":false,
-        "title":"Take your dinner",
-    },
-    {
-        "id":"35",
-        "time":"19:00",
-        "day":'6',
-        "done":false,
-        "title":"Take your dinner",
-    }
-    ,{
-        "id":"36",
-        "time":"19:00",
-        "day":'0',
-        "done":false,
-        "title":"Take your dinner",
-    },
-
-
-];
 
 
 
@@ -951,50 +597,73 @@ function getListByDay(day){
 
 router.get('/getByDay/:day', function(req, res, next) {
 
-    res.statusCode = 200;
-    res.json({tasks:getListByDay(req.params.day)});
+    const {day} = req.params;
+
+    if(!day){
+        res.statusCode = 400;
+        res.send();
+        return 0 ;
+    }else {
+        tasksService.getByDay(day,res);
+    }
 
 });
 
 router.get('/getAll', function(req, res, next) {
-
-    let responce = [];
-
-responce.push({'0':getListByDay('0')});
-responce.push({'1':getListByDay('1')});
-responce.push({'2':getListByDay('2')});
-responce.push({'3':getListByDay('3')});
-responce.push({'4':getListByDay('4')});
-responce.push({'5':getListByDay('5')});
-responce.push({'6':getListByDay('6')});
-
-    res.statusCode = 200;
-res.json({list:responce});
-
-
+    tasksService.getAll(res);
 });
 
 router.get('/setDone/:id', function(req, res, next) {
 
-    for(key in tasks){
-        if (tasks[key].id === req.params.id){
-            tasks[key].done = true;
-            res.statusCode = 200;
-            res.json({success:"done"});
-        }
+    const {id} = req.params;
+
+    if(!id){
+        res.statusCode = 400;
+        re.send();
+    }
+    else{
+        tasksService.setDone(id);
+        res.statusCode=200;
+        res.send();
     }
 
 });
 
 
+
+router.post('/addTask', function(req, res, next) {
+
+    // console.log(req.body);
+    try {
+        const {task} = req.body;
+
+        if (!task) throw new Error('task is not valid');
+
+        tasksService.addTask(task);
+        res.json({});
+
+    }catch (e) {
+        console.log(`Error ${e.message}`);
+        res.statusCode = 400;
+        res.setHeader('error',e.message);
+        res.send();
+    }
+});
+
+
 router.get('/setUndone/:id', function(req, res, next) {
 
-    for(key in tasks){
-        if (tasks[key].id === req.params.id){
-            tasks[key].done = false;
-            res.statusCode = 200;
-            res.json({success:"done"});
-        }
+
+    const {id} = req.params;
+
+    if(!id){
+        res.statusCode = 400;
+        re.send();
+    }
+    else{
+        tasksService.setUndone(id);
+        res.statusCode=200;
+        res.send();
     }
 
 });
