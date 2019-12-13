@@ -1,0 +1,1295 @@
+var express = require('express');
+var router = express.Router();
+const fs = require('fs');
+var formidable = require('formidable');
+const path = require('path');
+const request = require('request');
+var azure = require('azure-storage');
+var blobService = azure.createBlobService('bioit', 'sLP/I+G57qaGEz73Pjuv7/XP/0MiRgMb1mqUlMTMV/rHtTYsWA4D9ZL1LaPRzyZUkPS4NhIoSzC9wHCXkDvvjg==');
+const uuid = require('uuid/v4');
+const env = require('dotenv').config();
+const speech = require('./speech');
+
+
+
+
+var index = uuid();
+
+
+
+
+
+
+
+router.get('/memories', function(req, res, next) {
+
+    const object = {"pictures" : [
+        {
+            "pictureId":"p01",
+            "pictureUrl":"https://ak8.picdn.net/shutterstock/videos/4559978/thumb/2.jpg",
+            "title":"Family Birthday",
+            "description":"Family Birthday With all my Childrens and nephews",
+            "date":"30 June 2015",
+        },
+        {
+            "pictureId":"p02",
+            "pictureUrl":"https://previews.123rf.com/images/wavebreakmediamicro/wavebreakmediamicro1507/wavebreakmediamicro150701279/42215835-happy-family-faire-un-barbecue-dans-le-parc-sur-une-journ%C3%A9e-ensoleill%C3%A9e.jpg",
+            "title":"Family Barbecue",
+            "description":"Family Barbecue With my son John and His childrens",
+            "date":"23 July 2016",
+        },
+        {
+            "pictureId":"p03",
+            "pictureUrl":"http://jakekoteen.com/wp-content/uploads/2017/11/11-600-post/JKoteenPhotography_FamilyBeachSession__ConnecticutBeachPhotos_JakeKoteenPhotographer_6472.jpg",
+            "title":"Family at the beach",
+            "description":"Me , my husband and my two sons John and Max and their childrens at the beach ",
+            "date":"27 August 2018",
+        },
+        {
+            "pictureId":"p04",
+            "pictureUrl":"https://turksandcaicosreservations.com/turks/wp-content/uploads/2016/11/family-reunion.jpg",
+            "title":"Family Reunion",
+            "description":"Family Reunion with my sister , childrens and nephews",
+            "date":"15 March 2019",
+        },
+    ]}
+
+    res.json(object);
+});
+
+
+
+
+/*
+
+/* GET home page.
+router.get('/', function(req, res, next) {
+
+
+// Replace <Subscription Key> with cognitive.microsoft.com/face/v1.0/detect';your valid subscription key.
+    const subscriptionKey = 'e1be494ef3dc45cea5fe96cee8cbcec9';
+
+// You must use the same location in your REST call as you used to get your
+// subscription keys. For example, if you got your subscription keys from
+// westus, replace "westcentralus" in the URL below with "westus".
+    const uriBase = 'https://westcentralus.api.
+    const imageUrl =
+        'https://upload.wikimedia.org/wikipedia/commons/3/37/Dagestani_man_and_woman.jpg';
+
+// Request parameters.
+    const params = {
+        'returnFaceId': 'true',
+        'returnFaceLandmarks': 'false',
+        'returnFaceAttributes': 'age,gender,headPose,smile,facialHair,glasses,' +
+            'emotion,hair,makeup,occlusion,accessories,blur,exposure,noise'
+    };
+
+
+
+    const options = {
+        uri: uriBase,
+        qs: params,
+        body: '{"url": ' + '"' + imageUrl + '"}',
+        headers: {
+            'Content-Type': 'application/json',
+            'Ocp-Apim-Subscription-Key' : subscriptionKey
+        }
+    };
+
+    let person = {per: 'yes'};
+    request.post(options, (error, response, body) => {
+
+        if (body) {
+            console.log(body);
+            person = body;
+        }
+
+        if (error) {
+            console.log('Error: ', error);
+            return;
+        }
+        let jsonResponse = JSON.stringify(JSON.parse(body), null, '  ');
+        console.log('JSON Response\n');
+        console.log(jsonResponse);
+    });
+
+res.json(person);
+
+});
+
+*/
+
+
+
+router.get('/image/:fileName',  (req,res) => {
+
+    const {fileName} = req.params;
+
+    if(!fileName){
+        res.statusCode = 404;
+        res.send('');
+        return 0;
+    }
+
+    const uploadsDir = path.join(__dirname, '../uploads');
+    console.log(uploadsDir);
+    fs.readdir(uploadsDir, (err, files) => {
+        if(err) {
+            return res.send('No files found');
+        }
+        let name = false;
+
+
+        console.log(files);
+
+        files.forEach( (file, key) => {
+            if ( file === fileName  ) name = file;
+        });
+
+        if( !name )
+            res.send('File not found');
+        else
+            res.sendFile(name, { root: uploadsDir }, (err) => {
+                if (err) throw err;
+            } )
+
+
+    })
+});
+
+
+const getPerson = (personId) => {
+  //  console.log('name --------------------------------------------------------------------------------------------------------------');
+    const options = {
+        uri: 'https://westcentralus.api.cognitive.microsoft.com/face/v1.0/persongroups/friends/persons/' + personId,
+        headers: {
+            'Content-Type': 'application/json',
+            'Ocp-Apim-Subscription-Key': '85f31ab908714e0893cbf82faee8b026'
+        }
+    };
+    request.get(options, (error, responce, body) => {
+        console.log('name ------------------------------');
+
+        const obj = JSON.parse(body);
+        console.log(obj);
+        if (obj.hasOwnProperty('name')) {
+
+            const name = obj.name;
+            console.log(name);
+            return {
+                namePerson: name
+            };
+        }
+        return {error: 'person not found'};
+    });
+}
+
+
+router.post('/achref',  (req,res) => {
+    try {
+        var filePath;
+        var fileName;
+        var form = new formidable.IncomingForm();
+        form.uploadDir = './uploads';
+        form.keepExtensions = true;
+        form.type = true;
+        form.on('fileBegin', function (name, file) {
+            const extentionTab = file.type.split('/');
+            const extention = extentionTab[1];
+            file.path = __dirname + '\\..\\uploads\\' + index + '.png' ;//+ extention;
+            file.type = 'image/png';
+            file.name = index + '.png';
+            filePath = file.path;
+            fileName = file.name;
+            console.log(file);
+            index = uuid();
+        });
+        form.parse(req, (err, fields, files) => {
+
+            if (err) throw err;
+
+            /*
+            fs.readdir('C:\\Users\\Shiro\\Desktop\\bioit\\bio\\uploads',function (err,files) {
+                if(err) throw err;
+                files.forEach( (file) => {
+                    console.log(file);
+
+                } )
+            } );
+            */
+
+            /*
+                        jimp.read(filePath).then(data => {
+                           if (err) throw err;
+                           data.resize(256,256)
+                               .quality(60)
+                               .greyscale()
+                               .write(filePath);
+                        }).catch(err => console.log(err));
+            */
+            //    blobService.createAppendBlobFromLocalFile('bioit',filename+'.png',filePath, (err3, result, responce3) => {
+            //    });
+
+
+            blobService.createAppendBlobFromLocalFile('bioit',fileName,'./uploads/'+fileName, (err33, result3, responce33) => {
+                console.log(responce33);
+                if (responce33.statusCode === 200){
+                    const imageUrl = 'https://bioit.blob.core.windows.net/bioit/'+fileName ;
+                    const options = {
+                        uri: process.env.FACE_API_HOST+'detect?returnFaceId=true&returnFaceLandmarks=false&recognitionModel=recognition_01&returnRecognitionModel=false&detectionModel=detection_01',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Ocp-Apim-Subscription-Key' : process.env.FACE_API_KEY
+                        },
+                        body: '{"url": ' + '"' + imageUrl + '"}'
+                    };
+
+                    request.post(options, (error, responce, body) => {
+
+                        if (body){
+                            console.log(body);
+                            const object = JSON.parse(body);
+
+                            if(object.hasOwnProperty('error')){
+                                res.statusCode = 300;
+                                res.json({});
+                                return 0 ;
+                            }
+
+                            if (object.length === 0){
+                                res.statusCode = 300;
+                                res.setHeader('error','not a person');
+                                res.json({error: 'person not found'});
+                                index = uuid();
+                                return 0;
+                            }
+                            const array = object[0];
+                            if(!array.hasOwnProperty('faceId')){
+                                res.statusCode = 300;
+                                res.json({});
+                                return 0 ;
+                            }
+                            const {faceId} = array;
+
+                            if(!faceId){
+                                res.statusCode = 300;
+                                res.json({});
+                                return 0 ;
+                            }
+
+                      //      console.log(object);
+
+                            //  console.log(faceID);
+                            const a = '{"personGroupId": "friends", "faceIds": [ "'+ faceId+'"  ],  "maxNumOfCandidatesReturned": 1,  "confidenceThreshold": 0.5}';
+                            const op = {
+                                uri: process.env.FACE_API_HOST+'identify',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'Ocp-Apim-Subscription-Key' : process.env.FACE_API_KEY
+                                },
+                                body: a
+                            };
+                            request.post(op, (error2, responce2, body2) => {
+                                if (error2) {
+                                    console.log(error);
+                                    res.json({error: 'detecting person error'});
+                                    index= uuid();
+                                }
+                                if (body2) {
+                                    console.log(body2);
+                                    const obj = JSON.parse(body2);
+                                    const a = obj[0];
+                                    const {candidates} = a;
+
+                                    //check
+
+                                    if (candidates.length === 0) {
+                                        res.statusCode = 301;
+                                        res.setHeader('error', 'cant recognize');
+                                        res.json({error: 'user not found'});
+                                        index = uuid();
+                                        return 0;
+                                    }
+                                    const o = candidates[0];
+                                    console.log('---------------------------------------------------------------------------------------------------------');
+                                    candidates.forEach( person => {
+                                        console.log(person);
+                                    } );
+                                    const {personId} = o;
+                                    if(!personId) {
+                                        res.statusCode = 300;
+                                        res.setHeader('error','person not found');
+                                        res.json({error: 'person not found'});
+                                        index = uuid();
+                                        return 0;
+                                    }
+                                    console.log(personId);
+
+                                    const options3 = {
+                                        uri: process.env.FACE_API_HOST+'persongroups/friends/persons/'+personId,
+                                        headers: {
+                                            'Content-Type': 'application/json',
+                                            'Ocp-Apim-Subscription-Key' : process.env.FACE_API_KEY
+                                        }};
+
+                                    request.get(options3, (error3, responce3, body3) => {
+
+                                        const obj = JSON.parse(body3);
+                                        console.log(obj);
+                                        if ( obj.hasOwnProperty('name') )
+                                        {
+                                            const personObject = {name:obj.name, userData: obj.userData};
+                                            //  console.log(namee);
+
+
+
+                                            try {
+                                                const options = {
+                                                    uri: 'https://westeurope.api.cognitive.microsoft.com/sts/v1.0/issueToken',
+                                                    headers: {
+                                                        'Ocp-Apim-Subscription-Key': process.env.SPEECH_API_KEY,
+                                                        'Host': 'westeurope.api.cognitive.microsoft.com',
+                                                        'Content-type': 'application/x-www-form-urlencoded',
+                                                        'Content-Length': 0
+                                                    }
+                                                };
+
+                                                request.post(options, (errToken,responceToken,bodyToken) => {
+                                                    const token = bodyToken;
+                                                    speech.textToSpeech(token, res, personObject);
+                                                    index = uuid();
+                                                    return 0 ;
+                                                });
+                                                //  res.json({});
+
+                                            }catch (e) {
+                                                console.log(e);
+                                            }
+
+
+
+
+
+
+
+
+
+/*
+                                            res.statusCode = 200;
+                                            res.setHeader(  'name', obj.name);
+                                            res.setHeader(  'userData', obj.userData);
+                                            index = uuid();
+                                          //  res.json(personObject);  */
+                                        } else {
+                                            res.statusCode = 301;
+                                            res.json({error: 'user not found'});
+                                            index = uuid();
+                                            return 0;
+                                        }
+                                        //  res.json({error: 'person not found'});
+                                    });
+                                }
+                            });
+                        }
+                        if (error){
+                            console.log(error);
+                            res.statusCode = 404;
+                            res.json({error: 'identifing person error'});
+                            index = uuid();
+                            return 0;
+                        }
+                    });
+                }
+            });
+        });
+    }catch (e) {
+        console.log(e.message);
+        console.log(error);
+        res.statusCode = 500;
+        res.json({error: 'unknown error'});
+        index = uuid();
+        return 0;
+    }
+});
+
+
+
+
+
+
+
+router.get('/identify', function(req, res, next) {
+
+
+    var form = new formidable.IncomingForm();
+    form.uploadDir ='./uploads';
+    form.keepExtensions = true;
+    form.type = true;
+    form.on('fileBegin', function (name, file){
+        // console.log(file);
+        const extentionTab = file.type.split('/');
+        const extention = extentionTab[1];
+        file.path = __dirname + '\\..\\uploads\\' + index + '.jpg' ;
+    });
+
+
+
+    form.parse(req, (err, fields, files) => {
+
+        if(err) throw err;
+
+        //   fs.rename(files.image.path, './uploads/'+files.image.name, (err) => {if (err) throw err;});
+        console.log('Fields');
+        //  console.log(fields);
+        console.log('Files');
+        //  console.log(files.file);
+        blobService.createAppendBlobFromLocalFile('bioit',index+'.jpg','./uploads/'+index+'.jpg', (err33, result3, responce33) => {
+        });
+    });
+
+   const imageUrl = 'https://bioit.blob.core.windows.net/bioit/'+index+'.jpg' ;
+    const options = {
+        uri: 'https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect?returnFaceId=true&returnFaceLandmarks=false&recognitionModel=recognition_01&returnRecognitionModel=false&detectionModel=detection_01',
+        headers: {
+            'Content-Type': 'application/json',
+            'Ocp-Apim-Subscription-Key' : '85f31ab908714e0893cbf82faee8b026'
+        },
+        body: '{"url": ' + '"' + imageUrl + '"}'
+    };
+    console.log(options);
+    request.post(options, (error, responce, body) => {
+
+        if (body){
+           console.log(body);
+            const object = JSON.parse(body);
+            if (object.length === 0){
+                res.statusCode = 300;
+                res.setHeader('error','not a person');
+                res.json({error: 'person not found'});
+                index = uuid();
+                return 0;
+            }
+            const array = object[0];
+                const faceID = array.faceId;
+                console.log(object);
+
+          //  console.log(faceID);
+
+
+
+
+
+            const a = '{"personGroupId": "friends", "faceIds": [ "'+ faceID+'"  ],  "maxNumOfCandidatesReturned": 1,  "confidenceThreshold": 0.5}';
+            const op = {
+                uri: 'https://westcentralus.api.cognitive.microsoft.com/face/v1.0/identify',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Ocp-Apim-Subscription-Key' : '85f31ab908714e0893cbf82faee8b026'
+                },
+            body: a
+            }
+            request.post(op, (error2, responce2, body2) => {
+                if (error2) {
+                    console.log(error);
+                    res.json({error: 'detecting person error'});
+                }
+                if (body2) {
+                    console.log(body2);
+                    const obj = JSON.parse(body2);
+
+
+                            const a = obj[0];
+                            const candidates = a.candidates;
+                    if (candidates.length === 0) {
+                        res.statusCode = 301;
+                        res.setHeader('error', 'cant recognize');
+                        res.json({error: 'user not found'});
+                        index = uuid();
+                        return 0;
+                    }
+                            const o = candidates[0];
+                            const personId = o.personId;
+                            console.log(personId);
+
+
+                    const options3 = {
+                        uri: 'https://westcentralus.api.cognitive.microsoft.com/face/v1.0/persongroups/friends/persons/'+personId,
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Ocp-Apim-Subscription-Key' : '85f31ab908714e0893cbf82faee8b026'
+                        }};
+
+
+
+
+                    request.get(options3, (error3, responce3, body3) => {
+
+                        const obj = JSON.parse(body3);
+                        console.log(obj);
+                        if ( obj.hasOwnProperty('name') )
+                        {
+                            const namee = {name:obj.name, userData: obj.userData};
+                          //  console.log(namee);
+                            res.statusCode = 200;
+                            res.setHeader(  'name', obj.name);
+                            res.setHeader(  'userData', obj.userData);
+                            index = uuid();
+                            res.json(namee);
+                        } else {
+                            res.json({error: 'user not found'});
+                            index = uuid();
+                            return 0;
+                        }
+                      //  res.json({error: 'person not found'});
+
+
+                    });
+
+
+
+
+
+
+                }
+            });
+
+        }
+
+
+        if (error){
+            console.log(error);
+            res.json({error: 'identifing person error'});
+        }
+    });
+});
+
+var tasks =  [
+    {
+        "id":"23",
+        "time":"10:00",
+        "day":'1',
+        "done":false,
+        "title":"Take your treatment medicines",
+    },
+    {
+        "id":"29",
+        "time":"10:00",
+        "day":'2',
+        "done":false,
+        "title":"Take your treatment medicines",
+    },
+    {
+        "id":"28",
+        "time":"10:00",
+        "day":'3',
+        "done":true,
+        "title":"Take your treatment medicines",
+    },
+    {
+        "id":"27",
+        "time":"10:00",
+        "day":'4',
+        "done":true,
+        "title":"Take your treatment medicines",
+    },
+    {
+        "id":"26",
+        "time":"10:00",
+        "day":'5',
+        "done":true,
+        "title":"Take your treatment medicines",
+    },
+    {
+        "id":"25",
+        "time":"10:00",
+        "day":'6',
+        "done":true,
+        "title":"Take your treatment medicines",
+    },
+    {
+        "id":"24",
+        "time":"10:00",
+        "day":'0',
+        "done":true,
+        "title":"Take your treatment medicines",
+    },
+    {
+        "id":"44",
+        "time":"11:30",
+        "day":'1',
+        "done":true,
+        "title":"Take your pre-lunch medicines",
+    },
+    {
+        "id":"45",
+        "time":"11:30",
+        "day":'2',
+        "done":true,
+        "title":"Take your pre-lunch medicines",
+    },
+    {
+        "id":"46",
+        "time":"11:30",
+        "day":'3',
+        "done":true,
+        "title":"Take your pre-lunch medicines",
+    },
+    {
+        "id":"47",
+        "time":"11:30",
+        "day":'4',
+        "done":true,
+        "title":"Take your pre-lunch medicines",
+    },
+    {
+        "id":"48",
+        "time":"11:30",
+        "day":'5',
+        "done":true,
+        "title":"Take your pre-lunch medicines",
+    },
+    {
+        "id":"49",
+        "time":"11:30",
+        "day":'6',
+        "done":true,
+        "title":"Take your pre-lunch medicines",
+    },
+    {
+        "id":"50",
+        "time":"11:30",
+        "day":'0',
+        "done":true,
+        "title":"Take your pre-lunch medicines",
+    },
+    {
+        "id":"37",
+        "time":"12h",
+        "day":'1',
+        "done":true,
+        "title":"Take your lunch",
+    },
+    {
+        "id":"43",
+        "time":"12h",
+        "day":'2',
+        "done":true,
+        "title":"Take your lunch",
+    },
+    {
+        "id":"42",
+        "time":"12h",
+        "day":'3',
+        "done":true,
+        "title":"Take your lunch",
+    },
+    {
+        "id":"41",
+        "time":"12h",
+        "day":'4',
+        "done":true,
+        "title":"Take your lunch",
+    },
+    {
+        "id":"40",
+        "time":"12h",
+        "day":'5',
+        "done":true,
+        "title":"Take your lunch",
+    },
+    {
+        "id":"39",
+        "time":"12h",
+        "day":'6',
+        "done":true,
+        "title":"Take your lunch",
+    },
+    {
+        "id":"38",
+        "time":"12h",
+        "day":'0',
+        "done":true,
+        "title":"Take your lunch",
+    },
+
+    {
+        "id":"1",
+        "time":"15:30",
+        "day":'1',
+        "done":false,
+        "title":"Take vitamine C ",
+    },
+    {
+        "id":"2",
+        "time":"14:00",
+        "day":'1',
+        "done":true,
+        "title":"Take a shower",
+    },
+    {
+        "id":"3",
+        "time":"16:00",
+        "day":'2',
+        "done":false,
+        "title":"Take aspirine",
+    },
+    {
+        "id":"8",
+        "time":"15:30",
+        "day":'2',
+        "done":false,
+        "title":"Take vitamine C ",
+    },
+    {
+        "id":"9",
+        "time":"15:30",
+        "day":'3',
+        "done":false,
+        "title":"Take vitamine C ",
+    },
+    {
+        "id":"4",
+        "time":"15:30",
+        "day":'4',
+        "done":false,
+        "title":"Take vitamine C ",
+    },
+    {
+        "id":"5",
+        "time":"15:30",
+        "day":'5',
+        "done":false,
+        "title":"Take vitamine C ",
+    },
+    {
+        "id":"6",
+        "time":"15:30",
+        "day":'6',
+        "done":false,
+        "title":"Take vitamine C ",
+    },
+    {
+        "id":"7",
+        "time":"15:30",
+        "day":'0',
+        "done":false,
+        "title":"Take vitamine C ",
+    },
+    {
+        "id":"10",
+        "time":"14:00",
+        "day":'1',
+        "done":false,
+        "title":"Take a shower",
+    },
+    {
+        "id":"11",
+        "time":"14:00",
+        "day":'3',
+        "done":false,
+        "title":"Take a shower",
+    },
+    {
+        "id":"12",
+        "time":"14:00",
+        "day":'4',
+        "done":false,
+        "title":"Take a shower",
+    },
+    {
+        "id":"13",
+        "time":"14:00",
+        "day":'5',
+        "done":false,
+        "title":"Take a shower",
+    },
+    {
+        "id":"14",
+        "time":"14:00",
+        "day":'6',
+        "done":false,
+        "title":"Take a shower",
+    },
+    {
+        "id":"15",
+        "time":"14:00",
+        "day":'0',
+        "done":false,
+        "title":"Take a shower",
+    },
+    {
+        "id":"16",
+        "time":"17:00",
+        "day":'1',
+        "done":false,
+        "title":"Do some stretching exercices",
+    },
+    {
+        "id":"17",
+        "time":"17:00",
+        "day":'2',
+        "done":false,
+        "title":"Do some stretching exercices",
+    },
+    {
+        "id":"18",
+        "time":"17:00",
+        "day":'3',
+        "done":false,
+        "title":"Do some stretching exercices",
+    },
+    {
+        "id":"19",
+        "time":"17:00",
+        "day":'4',
+        "done":false,
+        "title":"Do some stretching exercices",
+    },
+    {
+        "id":"20",
+        "time":"17:00",
+        "day":'5',
+        "done":false,
+        "title":"Do some stretching exercices",
+    },
+    {
+        "id":"21",
+        "time":"17:00",
+        "day":'6',
+        "done":false,
+        "title":"Do some stretching exercices",
+    },
+    {
+        "id":"22",
+        "time":"17:00",
+        "day":'0',
+        "done":false,
+        "title":"Do some stretching exercices",
+    },
+    {
+        "id":"30",
+        "time":"19:00",
+        "day":'1',
+        "done":false,
+        "title":"Take your dinner",
+    },
+    {
+        "id":"31",
+        "time":"19:00",
+        "day":'2',
+        "done":false,
+        "title":"Take your dinner",
+    },
+    {
+        "id":"32",
+        "time":"19:00",
+        "day":'3',
+        "done":false,
+        "title":"Take your dinner",
+    },{
+        "id":"33",
+        "time":"19:00",
+        "day":'4',
+        "done":false,
+        "title":"Take your dinner",
+    },
+    {
+        "id":"34",
+        "time":"19:00",
+        "day":'5',
+        "done":false,
+        "title":"Take your dinner",
+    },
+    {
+        "id":"35",
+        "time":"19:00",
+        "day":'6',
+        "done":false,
+        "title":"Take your dinner",
+    }
+    ,{
+        "id":"36",
+        "time":"19:00",
+        "day":'0',
+        "done":false,
+        "title":"Take your dinner",
+    },
+
+
+];
+
+
+
+
+function getListByDay(day){
+    let responce = [];
+
+    for(key in tasks){
+        // console.log(key+"    " +tasks[key]);
+        if(tasks[key].day === day){
+            responce.push(tasks[key]);
+        }
+
+    }
+    return responce;
+}
+
+
+router.get('/getByDay/:day', function(req, res, next) {
+
+    res.statusCode = 200;
+    res.json({tasks:getListByDay(req.params.day)});
+
+});
+
+router.get('/getAll', function(req, res, next) {
+
+    let responce = [];
+
+responce.push({'0':getListByDay('0')});
+responce.push({'1':getListByDay('1')});
+responce.push({'2':getListByDay('2')});
+responce.push({'3':getListByDay('3')});
+responce.push({'4':getListByDay('4')});
+responce.push({'5':getListByDay('5')});
+responce.push({'6':getListByDay('6')});
+
+    res.statusCode = 200;
+res.json({list:responce});
+
+
+});
+
+router.get('/setDone/:id', function(req, res, next) {
+
+    for(key in tasks){
+        if (tasks[key].id === req.params.id){
+            tasks[key].done = true;
+            res.statusCode = 200;
+            res.json({success:"done"});
+        }
+    }
+
+});
+
+
+router.get('/setUndone/:id', function(req, res, next) {
+
+    for(key in tasks){
+        if (tasks[key].id === req.params.id){
+            tasks[key].done = false;
+            res.statusCode = 200;
+            res.json({success:"done"});
+        }
+    }
+
+});
+
+
+
+var lists = {"lists" : [
+    {
+        "title":"Changes in Behavior and Communication",
+        "list":[
+            {
+                "title":"Communication and Behavior Problems: Resources for Alzheimer's Caregivers",
+                "description":"Caregivers face a variety of challenges when a loved one develops Alzheimer's disease or another dementia, including communicating with the memory-impaired person and responding to difficult behaviors. This resource list offers a selection of articles, books, videos, and other materials that may help.",
+            },
+            {
+                "title":"Communicating with a Confused Patient",
+                "description":"Here are some tips for effectively working with and communicating with cognitively impaired patients. Try to address the patient directly, even if his or her cognitive capacity is diminished.Gain the person's attention. Sit in front of and at the same level as him or her and maintain eye contact.",
+            },
+            {
+                "title":"Coping with Agitation and Aggression in Alzheimer's Disease",
+                "description":"People with Alzheimer’s disease may become agitated or aggressive as the disease gets worse. Agitation means that a person is restless or worried. He or she doesn’t seem to be able to settle down. Agitation may cause pacing, sleeplessness, or aggression, which is when a person lashes out verbally or tries to hit or hurt someone.",
+            }
+        ],
+        "link":"https://www.nia.nih.gov/sites/default/files/styles/featured_resources/public/2017-07/behavior-changes-landing.jpg?h=f7b5df33&itok=YgYOSTxA"
+    },
+    {
+        "title":"Everyday Care",
+        "list":[
+            {
+                "title":"Going to the Hospital: Tips for Dementia Caregivers",
+                "description":"A trip to the hospital can be stressful for people with Alzheimer’s disease or another dementia and their caregivers. Being prepared for emergency and planned hospital visits can relieve some of that stress. This article suggests ways to help you prepare and tips for making your visit to the emergency room or hospital easier.",
+            },
+            {
+                "title":"Alzheimer's Disease: Common Medical Problems",
+                "description":"These diseases spread quickly from one person to another, and people with Alzheimer's are more likely to get them. Make sure that the person gets a flu shot each year and a pneumonia shot once after age 65. Some older people need to get more than one pneumonia vaccine. The shots lower the chances that the person will get the flu or pneumonia. For more information on pneumonia, visit the Centers for Disease Control and Prevention (CDC). For more information on the flu, visit the CDC or the National Institute of Allergy and Infectious Diseases.",
+            },
+            {
+                "title":"Finding Long-Term Care for a Person with Alzheimer's",
+                "description":"You may feel guilty or upset about this decision, but moving the person to a facility may be the best thing to do. It will give you greater peace of mind knowing that the person is safe and getting good care.Choosing the right place is a big decision. It’s hard to know where to start. The following overview of options, along with questions to ask and other resources, can help you get started.",
+},
+],
+"link":"https://www.nia.nih.gov/sites/default/files/styles/featured_resources/public/2017-07/everyday-care-landing.jpg?h=f7b5df33&itok=1gAqzzPi",
+},
+{
+    "title":"Relationships and Alzheimer's",
+    "list":[
+    {
+        "title":"Resources for Children and Teens About Alzheimer's Disease",
+        "description":"When someone has Alzheimer's disease, it affects everyone in the family, including children and grandchildren. This resource list offers a selection of fiction and nonfiction books, articles, websites, and other materials that may help children and teenagers cope when a family member or friend has Alzheimer's. They can also help parents talk with their children about the disease.",
+    },
+    {
+        "title":"Helping Kids Understand Alzheimer's Disease",
+        "description":"When a family member has Alzheimer’s disease, it affects everyone in the family, including children and grandchildren. It’s important to talk to them about what is happening. How much and what kind of information you share depends on the child’s age and relationship to the person with Alzheimer’s.",
+    },
+    {
+        "title":"Helping Family and Friends Understand Alzheimer's Disease",
+        "description":"You can help family and friends understand how to interact with the person with Alzheimer’s disease. Here are some tips:Help family and friends realize what the person can still do and how much he or she still can understand Give visitors suggestions about how to start talking with the person. For example, make eye contact and say, “Hello George, I’m John. We used to work together.”",
+},
+
+],
+    "link":"https://www.nia.nih.gov/sites/default/files/styles/featured_resources/public/2017-07/alzheimers-relationships-landing.jpg?h=f7b5df33&itok=A2afrp4t",
+},
+{
+    "title":"Safety and Alzheimer's",
+    "list":[
+    {
+        "title":"",
+        "description":"",
+    },
+],
+    "link":"https://www.nia.nih.gov/sites/default/files/styles/featured_resources/public/2017-07/safety-landing.jpg?h=f7b5df33&itok=vlsu2BnL",
+},
+{
+    "title":"Caregiver health",
+    "list":[
+    {
+        "title":"",
+        "description":"https://www.nia.nih.gov/sites/default/files/styles/featured_resources/public/2017-07/caregiver-health-landing.jpg?h=f7b5df33&itok=bXDVdVLD",
+    },
+],
+    "link":"",
+},
+{
+    "title":"Legal and Financial Issues",
+    "list":[
+    {
+        "title":"",
+        "description":"",
+    },
+],
+    "link":"https://www.nia.nih.gov/sites/default/files/styles/featured_resources/public/2017-07/legal-financial-issues-landing.jpg?h=f7b5df33&itok=TRu55xWK",
+}
+
+]};
+
+router.get('/lists', function(req, res, next) {
+    res.statusCode = 200;
+    res.json(lists);
+});
+
+router.post('/persons', function(req, res, next) {
+
+
+    const options = {
+        uri: 'https://westcentralus.api.cognitive.microsoft.com/face/v1.0/persongroups/friends/persons',
+        headers: {
+            'Content-Type': 'application/json',
+            'Ocp-Apim-Subscription-Key' : '85f31ab908714e0893cbf82faee8b026'
+        },body: '{"name":"'+req.headers.name+'" , "userData": "'+req.headers.userdata+'"}'
+    };
+    //console.log(req.headers)
+    //console.log(options);
+
+
+    request.post(options, (error, responce, body) => {
+
+       if(body){
+           console.log(body)
+           res.json(body);
+
+       }
+
+
+    });
+
+
+});
+
+
+
+
+router.get('/persons', function(req, res, next) {
+
+    const options = {
+        uri: 'https://westcentralus.api.cognitive.microsoft.com/face/v1.0/persongroups/friends/persons?start=0&top=1000',
+        headers: {
+            'Ocp-Apim-Subscription-Key' : '85f31ab908714e0893cbf82faee8b026'
+        }
+    };
+
+
+    let persons = [];
+    request.get(options, (error, responce, b) => {
+
+        const body = JSON.parse(b);
+        if(body){
+            console.log(body);
+            for (let dataKey in body) {
+                let obj = {name: body[dataKey].name, id: body[dataKey].personId};
+                persons.push(obj);
+            }
+            res.json({persons: persons});
+        }
+
+    });
+
+
+
+});
+
+
+
+router.post('/uploadImage/:id', function(req, res, next) {
+
+
+
+
+
+    var form = new formidable.IncomingForm();
+    form.uploadDir ='./uploads';
+    form.keepExtensions = true;
+    form.type = true;
+    form.on('fileBegin', function (name, file){
+        // console.log(file);
+        const extentionTab = file.type.split('/');
+        const extention = extentionTab[1];
+        file.path = __dirname + '\\..\\uploads\\' + index + '.jpg' ;
+    });
+
+
+
+    form.parse(req, (err, fields, files) => {
+
+        if(err) throw err;
+
+        //   fs.rename(files.image.path, './uploads/'+files.image.name, (err) => {if (err) throw err;});
+        console.log('Fields');
+        //  console.log(fields);
+        console.log('Files');
+        //  console.log(files.file);
+        blobService.createAppendBlobFromLocalFile('bioit',index+'.jpg','./uploads/'+index+'.jpg', (err33, result3, responce33) => {
+        });
+    });
+
+
+    const personId = req.params.id;
+
+    const imageUrl = 'https://bioit.blob.core.windows.net/bioit/'+index+'.jpg' ;
+
+    const  options = {
+        uri: 'https://westcentralus.api.cognitive.microsoft.com/face/v1.0/persongroups/friends/persons/'+personId +'/persistedFaces?detectionModel=detection_01',
+        headers: {
+            'Content-Type': 'application/json',
+            'Ocp-Apim-Subscription-Key' : '85f31ab908714e0893cbf82faee8b026'
+        },
+        body: '{"url": ' + '"' + imageUrl + '"}'
+    };
+
+    console.log(options);
+
+
+    request.post(options, (error, responce, body) => {
+
+        const b = JSON.parse(body);
+        console.log(b);
+
+        if (b.hasOwnProperty('error')) {
+            res.statusCode = 404;
+            res.json({error: 'error'});
+            index = uuid();
+            return 0;
+        }
+
+        const  options2 = {
+            uri: 'https://westcentralus.api.cognitive.microsoft.com/face/v1.0/persongroups/friends/train',
+            headers: {
+                'Ocp-Apim-Subscription-Key' : '85f31ab908714e0893cbf82faee8b026'
+            }
+        };
+
+        request.post(options2, (error2, responce2, body2) => {
+            res.statusCode = 200;
+            res.json({success: 'yes'});
+            index = uuid();
+            return 0;
+        });
+
+    });
+
+    // storage.ref().child('image').put();
+
+
+
+
+
+});
+
+router.get('/objects', function(req, res, next) {
+
+ const o =   {"objects"	:[
+        {	"name":"Medicaments",
+            "localisation":"In the medicine cabinet , in the bathroom",
+            "link":"https://www.containerstore.com/catalogimages/354039/HowToOrganizeYourMedicineCabinet_120.jpg?width=1200&height=1200&align=center"
+        },
+        {	"name":"Glasses",
+            "localisation":"In the night stand , in my bedroom",
+            "link":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJKIzoJLvYuV80gMUjpiiP_O11xASwMafY01i3JUP4XsZef5Be&s"
+        },
+        {	"name":"Clothes",
+            "localisation":"In my bedroom closet",
+            "link":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4lSA8Xpm0RKLpKzc7MuumgmMU4CubQG5XUx_TFlkuW3LWmlzE&s"
+        }
+    ]
+    };
+
+ res.statusCode = 200;
+ res.json(o);
+
+
+
+
+
+});
+
+router.get('/speech', function(req, res, next) {
+
+    console.log(req.body);
+    const {text} = req.body;
+
+    if(!text) throw new Error('no text provided');
+
+
+    try {
+        const options = {
+            uri: 'https://westeurope.api.cognitive.microsoft.com/sts/v1.0/issueToken',
+            headers: {
+                'Ocp-Apim-Subscription-Key': process.env.SPEECH_API_KEY,
+                'Host': 'westeurope.api.cognitive.microsoft.com',
+                'Content-type': 'application/x-www-form-urlencoded',
+                'Content-Length': 0
+            }
+        };
+
+        request.post(options, (err,responce,body) => {
+            const token = body;
+            speech.textToSpeech(token, text);
+            res.statusCode = 200;
+            res.json({});
+            return 0 ;
+        });
+      //  res.json({});
+
+
+
+    }catch (e) {
+        console.log(e);
+        res.json({});
+    }
+
+});
+
+module.exports = router;

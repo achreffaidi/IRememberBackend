@@ -1,0 +1,25 @@
+{
+  "name": "bio",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "azure-storage": "^2.10.3",
+    "cookie-parser": "~1.4.4",
+    "cors": "^2.8.5",
+    "debug": "~2.6.9",
+    "dotenv": "^8.2.0",
+    "express": "~4.16.1",
+    "file-system": "^2.2.2",
+    "formidable": "^1.2.1",
+    "morgan": "~1.9.1",
+    "pug": "2.0.0-beta11",
+    "readline-sync": "^1.4.10",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.5",
+    "uuid": "^3.3.3",
+    "xmlbuilder": "^13.0.2"
+  }
+}
