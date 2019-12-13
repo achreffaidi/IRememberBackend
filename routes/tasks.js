@@ -76,7 +76,9 @@ const getAllMongoose = async (res) => {
         allTasks.push(obj);
         });
         res.statusCode=200;
-        res.json(allTasks);
+        res.json({
+            list: allTasks
+        });
         return 0;
     } ).catch( err => {
         console.log(err);
@@ -119,7 +121,9 @@ const getTasksByDayMongoose = async (day,res) => {
         });
 
         res.statusCode=200;
-        res.json(tasksByDay);
+        res.json({
+          listByDay:  tasksByDay
+        });
         return 0;
     }).catch(err => {
         res.statusCode=404;
