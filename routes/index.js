@@ -155,6 +155,41 @@ router.get('/image/:fileName',  (req,res) => {
 });
 
 
+
+router.get('/speech/:fileName',  (req,res) => {
+
+    const {fileName} = req.params;
+
+    if(!fileName){
+        res.statusCode = 404;
+        res.send('');
+        return 0;
+    }
+
+    const uploadsDir = path.join('D:/home/site/wwwroot/speech');
+    console.log(uploadsDir);
+    fs.readdir(uploadsDir, (err, files) => {
+        if(err) {
+            return res.send('No files found');
+        }
+        let name = false;
+
+        files.forEach( (file, key) => {
+            if ( file === fileName  ) name = file;
+        });
+
+        if( !name )
+            res.send('File not found');
+        else
+            res.sendFile(name, { root: uploadsDir }, (err) => {
+                if (err) throw err;
+            } )
+
+
+    })
+});
+
+
 const getPerson = (personId) => {
   //  console.log('name --------------------------------------------------------------------------------------------------------------');
     const options = {

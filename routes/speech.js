@@ -68,22 +68,14 @@ const textToSpeech  = (accessToken, res, person) => {
                     request.pipe(fs.createWriteStream('D:/home/site/wwwroot/speech/'+speechName));
                     console.log('\nYour file is ready.\n');
 
-
-
-
-                    blobService.createAppendBlobFromLocalFile('speech', speechName , 'D:/home/site/wwwroot/speech/'+speechName, (err, result, responce) => {
                         if (err) throw new Error('error');
-                        if(responce.statusCode === 200 ){
                             res.statusCode = 200;
                             res.setHeader(  'name', person.name);
                             res.setHeader(  'userData', person.userData);
-                            res.setHeader(  'voice', 'https://bioit.blob.core.windows.net/speech/'+speechName);
+                            res.setHeader(  'voice', 'https://i-remember.azurewebsites.net/speech/'+speechName);
                             index = uuid();
                             res.json(person);
                             index = uuid();
-                        }
-                    });
-
                 }
             });
         return request;
