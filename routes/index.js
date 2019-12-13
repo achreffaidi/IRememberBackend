@@ -131,7 +131,7 @@ router.get('/image/:fileName',  (req,res) => {
         return 0;
     }
 
-    const uploadsDir = path.join(__dirname, '../uploads');
+    const uploadsDir = path.join('D:/home/site/wwwroot/uploads');
     console.log(uploadsDir);
     fs.readdir(uploadsDir, (err, files) => {
         if(err) {
