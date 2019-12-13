@@ -1014,8 +1014,6 @@ router.get('/speech', function(req, res, next) {
         request.post(options, (err,responce,body) => {
             const token = body;
             speech.textToSpeech(token, res,text);
-            res.statusCode = 200;
-            res.json({});
             return 0 ;
         });
       //  res.json({});
