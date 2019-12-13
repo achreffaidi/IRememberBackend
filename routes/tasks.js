@@ -98,12 +98,28 @@ const setUndoneMongoose = async (id) => {
 }
 
 const getTasksByDayMongoose = async (day,res) => {
+
+    var tasksByDay = [];
+
     const query = tasksModel.find({day: day});
     const p = query.exec();
     p.then(data => {
         console.log(data);
+
+        data.forEach(task => {
+            let {id,title,time,done,day} = task;
+            let obj = {
+                title: title,
+                id: id,
+                time: time,
+                done: done,
+                day: day
+            };
+            tasksByDay.push(obj);
+        });
+
         res.statusCode=200;
-        res.json(data);
+        res.json(tasksByDay);
         return 0;
     }).catch(err => {
         res.statusCode=404;
