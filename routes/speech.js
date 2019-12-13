@@ -35,6 +35,8 @@ const textToSpeech  = (accessToken, res, person) => {
             .end();
         // Convert the XML into a string to send in the TTS request.
         let body = xml_body.toString();
+        
+        console.log(body);
 
         let options = {
             method: 'POST',
@@ -56,13 +58,20 @@ const textToSpeech  = (accessToken, res, person) => {
         let request = rp(options)
             .on('response', (response) => {
                 if (response.statusCode === 200) {
-                    request.pipe(fs.createWriteStream('./speech/'+speechName));
+                    
+             //       var stream = fs.createReadStream(fileNameTarget).pipe(FileService.createWriteStreamToNewFile(shareName, directoryName, fileName));
+             
+             console.log(process.cwd())
+// C:\Project
+//console.log(__dirname)
+                    
+                    request.pipe(fs.createWriteStream('D:/home/site/wwwroot/speech/'+speechName));
                     console.log('\nYour file is ready.\n');
 
 
 
 
-                    blobService.createAppendBlobFromLocalFile('speech', speechName , './speech/'+ speechName, (err, result, responce) => {
+                    blobService.createAppendBlobFromLocalFile('speech', speechName , 'D:/home/site/wwwroot/speech/'+speechName, (err, result, responce) => {
                         if (err) throw new Error('error');
                         if(responce.statusCode === 200 ){
                             res.statusCode = 200;

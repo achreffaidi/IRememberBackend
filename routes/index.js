@@ -231,7 +231,7 @@ router.post('/achref',  (req,res) => {
             //    });
 
 
-            blobService.createAppendBlobFromLocalFile('bioit',fileName,'./uploads/'+fileName, (err33, result3, responce33) => {
+            blobService.createAppendBlobFromLocalFile('bioit',fileName,filePath, (err33, result3, responce33) => {
                 console.log(responce33);
                 if (responce33.statusCode === 200){
                     const imageUrl = 'https://bioit.blob.core.windows.net/bioit/'+fileName ;
