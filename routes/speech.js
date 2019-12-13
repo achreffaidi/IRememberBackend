@@ -68,7 +68,6 @@ const textToSpeech  = (accessToken, res, person) => {
                     request.pipe(fs.createWriteStream('D:/home/site/wwwroot/speech/'+speechName));
                     console.log('\nYour file is ready.\n');
 
-                        if (err) throw new Error('error');
                             res.statusCode = 200;
                             res.setHeader(  'name', person.name);
                             res.setHeader(  'userData', person.userData);
