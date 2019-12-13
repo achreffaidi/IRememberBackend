@@ -420,7 +420,7 @@ router.post('/achref',  (req,res) => {
 
                                                 request.post(options, (errToken,responceToken,bodyToken) => {
                                                     const token = bodyToken;
-                                                    speech.textToSpeech(token, res, personObject);
+                                                    speech.textToSpeechForIdentification(token, res, personObject);
                                                     index = uuid();
                                                     return 0 ;
                                                 });
@@ -995,9 +995,9 @@ router.get('/objects', function(req, res, next) {
 router.get('/speech', function(req, res, next) {
 
     console.log(req.body);
-    const {text} = req.body;
+    const text = req.body;
 
-    if(!text) throw new Error('no text provided');
+    if(text.length() === 0) throw new Error('no text provided');
 
 
     try {
@@ -1028,5 +1028,13 @@ router.get('/speech', function(req, res, next) {
     }
 
 });
+
+
+
+
+
+
+
+
 
 module.exports = router;
