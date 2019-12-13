@@ -997,7 +997,7 @@ router.get('/speech', function(req, res, next) {
     console.log(req.body);
     const text = req.body;
 
-    if(text.length() === 0) throw new Error('no text provided');
+    if(text.length === 0) throw new Error('no text provided');
 
 
     try {
