@@ -231,10 +231,7 @@ router.post('/achref',  (req,res) => {
             //    });
 
 
-            blobService.createAppendBlobFromLocalFile('bioit',fileName,filePath, (err33, result3, responce33) => {
-                console.log(responce33);
-                if (responce33.statusCode === 200){
-                    const imageUrl = 'https://bioit.blob.core.windows.net/bioit/'+fileName ;
+                    const imageUrl = 'https://i-remember.azurewebsites.net/image/'+fileName ;
                     const options = {
                         uri: process.env.FACE_API_HOST+'detect?returnFaceId=true&returnFaceLandmarks=false&recognitionModel=recognition_01&returnRecognitionModel=false&detectionModel=detection_01',
                         headers: {
@@ -366,20 +363,6 @@ router.post('/achref',  (req,res) => {
                                                 console.log(e);
                                             }
 
-
-
-
-
-
-
-
-
-/*
-                                            res.statusCode = 200;
-                                            res.setHeader(  'name', obj.name);
-                                            res.setHeader(  'userData', obj.userData);
-                                            index = uuid();
-                                          //  res.json(personObject);  */
                                         } else {
                                             res.statusCode = 301;
                                             res.json({error: 'user not found'});
@@ -399,8 +382,7 @@ router.post('/achref',  (req,res) => {
                             return 0;
                         }
                     });
-                }
-            });
+                
         });
     }catch (e) {
         console.log(e.message);
