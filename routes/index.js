@@ -712,7 +712,9 @@ router.post('/uploadImage/:id', function(req, res, next) {
         // console.log(file);
         const extentionTab = file.type.split('/');
         const extention = extentionTab[1];
-        file.path = __dirname + '\\..\\uploads\\' + index + '.jpg' ;
+        file.path = __dirname + '\\..\\uploads\\' + index + '.png' ;
+        file.type = 'image/png';
+        file.name = index + '.png';
     });
 
 
@@ -726,20 +728,20 @@ router.post('/uploadImage/:id', function(req, res, next) {
         //  console.log(fields);
         console.log('Files');
         //  console.log(files.file);
-        blobService.createAppendBlobFromLocalFile('bioit',index+'.jpg','./uploads/'+index+'.jpg', (err33, result3, responce33) => {
-        });
+
     });
 
 
     const personId = req.params.id;
 
-    const imageUrl = 'https://bioit.blob.core.windows.net/bioit/'+index+'.jpg' ;
+    const imageUrl = 'https://i-remember.azurewebsites.net/image/'+index+'.png' ;
+ //   const imageUrl = 'https://bioit.blob.core.windows.net/bioit/'+index+'.jpg' ;
 
     const  options = {
-        uri: 'https://westcentralus.api.cognitive.microsoft.com/face/v1.0/persongroups/friends/persons/'+personId +'/persistedFaces?detectionModel=detection_01',
+        uri: process.env.FACE_API_HOST+'persongroups/friends/persons/'+personId +'/persistedFaces?detectionModel=detection_01',
         headers: {
             'Content-Type': 'application/json',
-            'Ocp-Apim-Subscription-Key' : '85f31ab908714e0893cbf82faee8b026'
+            'Ocp-Apim-Subscription-Key' : process.env.FACE_API_KEY
         },
         body: '{"url": ' + '"' + imageUrl + '"}'
     };
@@ -760,17 +762,24 @@ router.post('/uploadImage/:id', function(req, res, next) {
         }
 
         const  options2 = {
-            uri: 'https://westcentralus.api.cognitive.microsoft.com/face/v1.0/persongroups/friends/train',
+            uri: process.env.FACE_API_HOST+'persongroups/friends/train',
             headers: {
-                'Ocp-Apim-Subscription-Key' : '85f31ab908714e0893cbf82faee8b026'
+                'Ocp-Apim-Subscription-Key' : process.env.FACE_API_KEY
             }
         };
 
         request.post(options2, (error2, responce2, body2) => {
-            res.statusCode = 200;
-            res.json({success: 'yes'});
-            index = uuid();
-            return 0;
+            if(err){
+                res.statusCode = 400;
+                res.send();
+                index = uuid();
+                return 0;
+            }else {
+                res.statusCode = 200;
+               res.send();
+                index = uuid();
+                return 0;
+            }
         });
 
     });

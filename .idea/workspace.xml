@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="83cf076e-4dd3-4aec-832d-9bfc08b799a2" name="Default Changelist" comment="first" />
+    <list default="true" id="83cf076e-4dd3-4aec-832d-9bfc08b799a2" name="Default Changelist" comment="first">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/memories.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/memories.js" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -63,44 +67,55 @@
         <counts>
           <entry key="env" value="2" />
           <entry key="js" value="4" />
+          <entry key="png" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key=".env file" value="2" />
+          <entry key="Image" value="1" />
           <entry key="JavaScript" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="env" value="28" />
-          <entry key="js" value="3085" />
+          <entry key="js" value="3303" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key=".env file" value="28" />
-          <entry key="JavaScript" value="3085" />
+          <entry key="JavaScript" value="3303" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/tasks.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="69" column="8" selection-start-line="69" selection-start-column="8" selection-end-line="69" selection-end-column="8" />
+            <state relative-caret-position="392">
+              <caret line="146" column="38" lean-forward="true" selection-start-line="146" selection-start-column="38" selection-end-line="146" selection-end-column="38" />
+              <folding>
+                <element signature="e#360#618#0" />
+                <element signature="e#661#885#0" />
+                <element signature="e#982#1124#0" />
+                <element signature="e#1165#1827#0" />
+                <element signature="e#1868#1967#0" />
+                <element signature="e#2009#2109#0" />
+                <element signature="e#2160#2846#0" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/routes/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="679" selection-start-line="679" selection-end-line="680" />
+            <state relative-caret-position="55">
+              <caret line="736" column="65" lean-forward="true" selection-start-line="736" selection-start-column="22" selection-end-line="736" selection-end-column="65" />
               <folding>
                 <element signature="e#471#517#0" />
                 <element signature="e#575#2057#0" />
@@ -108,7 +123,6 @@
                 <element signature="e#4506#5186#0" />
                 <element signature="e#5238#5917#0" />
                 <element signature="e#5954#6813#0" />
-                <element signature="e#6853#16780#0" />
                 <element signature="n#!!block;n#getListByDay#0" />
                 <element signature="e#22066#22243#0" />
                 <element signature="e#22294#22327#0" />
@@ -118,9 +132,11 @@
                 <element signature="e#23312#23517#0" />
                 <element signature="e#23546#29490#0" />
                 <element signature="e#29540#29590#0" />
-                <element signature="e#31004#33221#0" />
+                <element signature="e#29643#30229#0" />
+                <element signature="e#30284#30941#0" />
                 <element signature="e#33273#34074#0" />
                 <element signature="e#34125#34924#0" />
+                <element signature="e#34977#34985#0" />
               </folding>
             </state>
           </provider>
@@ -138,8 +154,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/location.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" selection-start-line="5" selection-end-line="5" />
+            <state relative-caret-position="68">
+              <caret line="4" column="117" lean-forward="true" selection-start-line="4" selection-end-line="5" />
             </state>
           </provider>
         </entry>
@@ -147,8 +163,12 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/memories.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" selection-start-line="3" selection-end-line="3" />
+            <state relative-caret-position="291">
+              <caret line="68" lean-forward="true" selection-start-line="68" selection-end-line="68" />
+              <folding>
+                <element signature="e#604#1308#0" />
+                <element signature="e#1348#1423#0" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -156,7 +176,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/speech.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1989">
+            <state relative-caret-position="1581">
               <caret line="147" column="36" selection-start-line="147" selection-start-column="36" selection-end-line="147" selection-end-column="36" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
@@ -189,10 +209,10 @@
       <list>
         <option value="$PROJECT_DIR$/routes/speech.js" />
         <option value="$PROJECT_DIR$/.env" />
+        <option value="$PROJECT_DIR$/routes/tasks.js" />
         <option value="$PROJECT_DIR$/routes/location.js" />
         <option value="$PROJECT_DIR$/routes/memories.js" />
         <option value="$PROJECT_DIR$/routes/index.js" />
-        <option value="$PROJECT_DIR$/routes/tasks.js" />
       </list>
     </option>
   </component>
@@ -236,6 +256,11 @@
               <item name="IRememberBackend" type="462c0819:PsiDirectoryNode" />
               <item name="routes" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="IRememberBackend" type="b2602c69:ProjectViewProjectNode" />
+              <item name="IRememberBackend" type="462c0819:PsiDirectoryNode" />
+              <item name="uploads" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -273,17 +298,18 @@
       <workItem from="1576059070548" duration="14230000" />
       <workItem from="1576173275612" duration="21193000" />
       <workItem from="1576272108952" duration="9647000" />
-      <workItem from="1576337499084" duration="8998000" />
+      <workItem from="1576337499084" duration="10628000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="54068000" />
+    <option name="totallyTimeSpent" value="55698000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.08261732" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.3311302" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -297,7 +323,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.30212766" />
+      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.30212766" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -363,51 +389,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/memories.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/speech.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1989">
-          <caret line="147" column="36" selection-start-line="147" selection-start-column="36" selection-end-line="147" selection-end-column="36" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="679" selection-start-line="679" selection-end-line="680" />
-          <folding>
-            <element signature="e#471#517#0" />
-            <element signature="e#575#2057#0" />
-            <element signature="e#2113#2845#0" />
-            <element signature="e#4506#5186#0" />
-            <element signature="e#5238#5917#0" />
-            <element signature="e#5954#6813#0" />
-            <element signature="e#6853#16780#0" />
-            <element signature="n#!!block;n#getListByDay#0" />
-            <element signature="e#22066#22243#0" />
-            <element signature="e#22294#22327#0" />
-            <element signature="e#22383#22584#0" />
-            <element signature="e#22639#22992#0" />
-            <element signature="e#23051#23255#0" />
-            <element signature="e#23312#23517#0" />
-            <element signature="e#23546#29490#0" />
-            <element signature="e#29540#29590#0" />
-            <element signature="e#31004#33221#0" />
-            <element signature="e#33273#34074#0" />
-            <element signature="e#34125#34924#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/.env">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -417,15 +398,77 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/location.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        <state relative-caret-position="68">
+          <caret line="4" column="117" lean-forward="true" selection-start-line="4" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/speech.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1581">
+          <caret line="147" column="36" selection-start-line="147" selection-start-column="36" selection-end-line="147" selection-end-column="36" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/memories.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="291">
+          <caret line="68" lean-forward="true" selection-start-line="68" selection-end-line="68" />
+          <folding>
+            <element signature="e#604#1308#0" />
+            <element signature="e#1348#1423#0" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/tasks.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="69" column="8" selection-start-line="69" selection-start-column="8" selection-end-line="69" selection-end-column="8" />
+        <state relative-caret-position="392">
+          <caret line="146" column="38" lean-forward="true" selection-start-line="146" selection-start-column="38" selection-end-line="146" selection-end-column="38" />
+          <folding>
+            <element signature="e#360#618#0" />
+            <element signature="e#661#885#0" />
+            <element signature="e#982#1124#0" />
+            <element signature="e#1165#1827#0" />
+            <element signature="e#1868#1967#0" />
+            <element signature="e#2009#2109#0" />
+            <element signature="e#2160#2846#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/uploads/e46ad7da-4b0c-4a13-b841-1d30ce19210c.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="55">
+          <caret line="736" column="65" lean-forward="true" selection-start-line="736" selection-start-column="22" selection-end-line="736" selection-end-column="65" />
+          <folding>
+            <element signature="e#471#517#0" />
+            <element signature="e#575#2057#0" />
+            <element signature="e#2113#2845#0" />
+            <element signature="e#4506#5186#0" />
+            <element signature="e#5238#5917#0" />
+            <element signature="e#5954#6813#0" />
+            <element signature="n#!!block;n#getListByDay#0" />
+            <element signature="e#22066#22243#0" />
+            <element signature="e#22294#22327#0" />
+            <element signature="e#22383#22584#0" />
+            <element signature="e#22639#22992#0" />
+            <element signature="e#23051#23255#0" />
+            <element signature="e#23312#23517#0" />
+            <element signature="e#23546#29490#0" />
+            <element signature="e#29540#29590#0" />
+            <element signature="e#29643#30229#0" />
+            <element signature="e#30284#30941#0" />
+            <element signature="e#33273#34074#0" />
+            <element signature="e#34125#34924#0" />
+            <element signature="e#34977#34985#0" />
+          </folding>
         </state>
       </provider>
     </entry>

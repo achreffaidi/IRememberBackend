@@ -65,6 +65,15 @@ const addMemoryMongoose = (memory) => {
 }
 
 
+const removeMemoryMongoose = (id ,res) => {
+
+    const promise =  memoryModel.deleteOne({pictureId: id},taskObject, err => {
+        if (err) throw new Error();
+    });
+
+}
+
+
 exports.getAllMemories = getAllMemoriesMongoose;
 exports.addMemory = addMemoryMongoose;
-
+exports.removeMemory = removeMemoryMongoose;
