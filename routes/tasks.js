@@ -2,7 +2,7 @@ var MongoClient = require('mongodb').MongoClient;
 var mongoose =require('mongoose');
 
 
-const uri = process.env.MONGODB_CONNECTION_STRING;
+const uri = "mongodb+srv://redwalls:redwalls@cluster0-jivu8.azure.mongodb.net/IRemember?retryWrites=true&w=majority";
 mongoose.connect(uri, {useNewUrlParser: true});
 
 var length ;
@@ -47,7 +47,6 @@ const tasksModel = mongoose.model('tasks', taskSchema);
 
 const addMongoose = (taskObject) => {
 
-
     length++;
     taskObject.id = length;
 
@@ -59,15 +58,11 @@ const addMongoose = (taskObject) => {
 };
 
 const getAllMongoose = async (res) => {
-
-    console.log('uri===============================================================================================================');
-    console.log(uri);
-
     var allTasks = [];
     const query = tasksModel.find();
     const p = query.exec();
     p.then( data => {
-      //  console.log(data);
+     //   console.log(data);
         length=data.length;
         data.forEach(task => {
         let  {id,day,time,title,done} = task;
