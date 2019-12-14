@@ -10,6 +10,8 @@ const speech = require('./speech');
 const tasksService = require('./tasks');
 const memoriesService = require('./memories');
 const locationService = require('./location');
+var Jimp = require('jimp');
+
 
 
 
@@ -255,6 +257,25 @@ router.post('/achref',  (req,res) => {
         form.parse(req, (err, fields, files) => {
 
             if (err) throw err;
+
+
+            // rotate
+/*
+          sharp(filePath)
+              .rotate(-90)
+              .toFile(filePath,errSharp => {
+                  console.log(errSharp);
+              });
+*/
+            //ROTATE
+            Jimp.read(filePath)
+                .then( image => {
+                    return image
+                        .rotate(90)
+                        .write(filePath);
+                } ).catch(err => {
+                    console.error(err);
+            })
 
             /*
             fs.readdir('C:\\Users\\Shiro\\Desktop\\bioit\\bio\\uploads',function (err,files) {
