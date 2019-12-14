@@ -112,43 +112,7 @@ router.get('/memoryImage/:fileName',  (req,res) => {
     })
 });
 
-/*
-router.get('/memories', function(req, res, next) {
 
-    const object = {"pictures" : [
-        {
-            "pictureId":"p01",
-            "pictureUrl":"https://ak8.picdn.net/shutterstock/videos/4559978/thumb/2.jpg",
-            "title":"Family Birthday",
-            "description":"Family Birthday With all my Childrens and nephews",
-            "date":"30 June 2015",
-        },
-        {
-            "pictureId":"p02",
-            "pictureUrl":"https://previews.123rf.com/images/wavebreakmediamicro/wavebreakmediamicro1507/wavebreakmediamicro150701279/42215835-happy-family-faire-un-barbecue-dans-le-parc-sur-une-journ%C3%A9e-ensoleill%C3%A9e.jpg",
-            "title":"Family Barbecue",
-            "description":"Family Barbecue With my son John and His childrens",
-            "date":"23 July 2016",
-        },
-        {
-            "pictureId":"p03",
-            "pictureUrl":"http://jakekoteen.com/wp-content/uploads/2017/11/11-600-post/JKoteenPhotography_FamilyBeachSession__ConnecticutBeachPhotos_JakeKoteenPhotographer_6472.jpg",
-            "title":"Family at the beach",
-            "description":"Me , my husband and my two sons John and Max and their childrens at the beach ",
-            "date":"27 August 2018",
-        },
-        {
-            "pictureId":"p04",
-            "pictureUrl":"https://turksandcaicosreservations.com/turks/wp-content/uploads/2016/11/family-reunion.jpg",
-            "title":"Family Reunion",
-            "description":"Family Reunion with my sister , childrens and nephews",
-            "date":"15 March 2019",
-        },
-    ]}
-
-    res.json(object);
-});
-*/
 
 
 
@@ -463,150 +427,7 @@ router.post('/achref',  (req,res) => {
 
 
 
-router.get('/identify', function(req, res, next) {
 
-
-    var form = new formidable.IncomingForm();
-    form.uploadDir ='./uploads';
-    form.keepExtensions = true;
-    form.type = true;
-    form.on('fileBegin', function (name, file){
-        // console.log(file);
-        const extentionTab = file.type.split('/');
-        const extention = extentionTab[1];
-        file.path = __dirname + '\\..\\uploads\\' + index + '.jpg' ;
-    });
-
-
-
-    form.parse(req, (err, fields, files) => {
-
-        if(err) throw err;
-
-        //   fs.rename(files.image.path, './uploads/'+files.image.name, (err) => {if (err) throw err;});
-        console.log('Fields');
-        //  console.log(fields);
-        console.log('Files');
-        //  console.log(files.file);
-        blobService.createAppendBlobFromLocalFile('bioit',index+'.jpg','./uploads/'+index+'.jpg', (err33, result3, responce33) => {
-        });
-    });
-
-   const imageUrl = 'https://bioit.blob.core.windows.net/bioit/'+index+'.jpg' ;
-    const options = {
-        uri: 'https://westcentralus.api.cognitive.microsoft.com/face/v1.0/detect?returnFaceId=true&returnFaceLandmarks=false&recognitionModel=recognition_01&returnRecognitionModel=false&detectionModel=detection_01',
-        headers: {
-            'Content-Type': 'application/json',
-            'Ocp-Apim-Subscription-Key' : '85f31ab908714e0893cbf82faee8b026'
-        },
-        body: '{"url": ' + '"' + imageUrl + '"}'
-    };
-    console.log(options);
-    request.post(options, (error, responce, body) => {
-
-        if (body){
-           console.log(body);
-            const object = JSON.parse(body);
-            if (object.length === 0){
-                res.statusCode = 300;
-                res.setHeader('error','not a person');
-                res.json({error: 'person not found'});
-                index = uuid();
-                return 0;
-            }
-            const array = object[0];
-                const faceID = array.faceId;
-                console.log(object);
-
-          //  console.log(faceID);
-
-
-
-
-
-            const a = '{"personGroupId": "friends", "faceIds": [ "'+ faceID+'"  ],  "maxNumOfCandidatesReturned": 1,  "confidenceThreshold": 0.5}';
-            const op = {
-                uri: 'https://westcentralus.api.cognitive.microsoft.com/face/v1.0/identify',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Ocp-Apim-Subscription-Key' : '85f31ab908714e0893cbf82faee8b026'
-                },
-            body: a
-            }
-            request.post(op, (error2, responce2, body2) => {
-                if (error2) {
-                    console.log(error);
-                    res.json({error: 'detecting person error'});
-                }
-                if (body2) {
-                    console.log(body2);
-                    const obj = JSON.parse(body2);
-
-
-                            const a = obj[0];
-                            const candidates = a.candidates;
-                    if (candidates.length === 0) {
-                        res.statusCode = 301;
-                        res.setHeader('error', 'cant recognize');
-                        res.json({error: 'user not found'});
-                        index = uuid();
-                        return 0;
-                    }
-                            const o = candidates[0];
-                            const personId = o.personId;
-                            console.log(personId);
-
-
-                    const options3 = {
-                        uri: 'https://westcentralus.api.cognitive.microsoft.com/face/v1.0/persongroups/friends/persons/'+personId,
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Ocp-Apim-Subscription-Key' : '85f31ab908714e0893cbf82faee8b026'
-                        }};
-
-
-
-
-                    request.get(options3, (error3, responce3, body3) => {
-
-                        const obj = JSON.parse(body3);
-                        console.log(obj);
-                        if ( obj.hasOwnProperty('name') )
-                        {
-                            const namee = {name:obj.name, userData: obj.userData};
-                          //  console.log(namee);
-                            res.statusCode = 200;
-                            res.setHeader(  'name', obj.name);
-                            res.setHeader(  'userData', obj.userData);
-                            index = uuid();
-                            res.json(namee);
-                        } else {
-                            res.json({error: 'user not found'});
-                            index = uuid();
-                            return 0;
-                        }
-                      //  res.json({error: 'person not found'});
-
-
-                    });
-
-
-
-
-
-
-                }
-            });
-
-        }
-
-
-        if (error){
-            console.log(error);
-            res.json({error: 'identifing person error'});
-        }
-    });
-});
 
 
 
@@ -818,10 +639,10 @@ router.post('/persons', function(req, res, next) {
 
 
     const options = {
-        uri: 'https://westcentralus.api.cognitive.microsoft.com/face/v1.0/persongroups/friends/persons',
+        uri: process.env.FACE_API_HOST+'persongroups/friends/persons',
         headers: {
             'Content-Type': 'application/json',
-            'Ocp-Apim-Subscription-Key' : '85f31ab908714e0893cbf82faee8b026'
+            'Ocp-Apim-Subscription-Key' : process.env.FACE_API_KEY
         },body: '{"name":"'+req.headers.name+'" , "userData": "'+req.headers.userdata+'"}'
     };
     //console.log(req.headers)
@@ -856,8 +677,7 @@ router.get('/persons', function(req, res, next) {
 
 
     let persons = [];
-    console.log('=============================================================');
-    console.log(options);
+
     request.get(options, (error, responce, b) => {
 
         const body = JSON.parse(b);

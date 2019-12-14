@@ -2,7 +2,7 @@ var mongoose =require('mongoose');
 
 
 
-const uri = "mongodb+srv://redwalls:redwalls@cluster0-jivu8.azure.mongodb.net/IRemember?retryWrites=true&w=majority";
+const uri = process.env.MONGODB_CONNECTION_STRING;
 mongoose.connect(uri, {useNewUrlParser: true});
 
 

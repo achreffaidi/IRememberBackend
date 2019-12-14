@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="83cf076e-4dd3-4aec-832d-9bfc08b799a2" name="Default Changelist" comment="first">
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/location.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/location.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/memories.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/memories.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/tasks.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/tasks.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -75,12 +79,14 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="js" value="2906" />
+          <entry key="env" value="28" />
+          <entry key="js" value="2950" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JavaScript" value="2906" />
+          <entry key=".env file" value="28" />
+          <entry key="JavaScript" value="2950" />
         </counts>
       </usages-collector>
     </session>
@@ -90,8 +96,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/tasks.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-306">
-              <caret selection-end-column="49" />
+            <state relative-caret-position="68">
+              <caret line="4" selection-start-line="4" selection-end-line="4" selection-end-column="50" />
               <folding>
                 <element signature="e#1165#1827#0" />
               </folding>
@@ -102,18 +108,16 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/routes/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="268">
-              <caret line="858" column="81" selection-start-line="858" selection-start-column="81" selection-end-line="858" selection-end-column="81" />
+            <state relative-caret-position="150">
+              <caret line="679" selection-start-line="679" selection-end-line="680" />
               <folding>
                 <element signature="e#471#517#0" />
                 <element signature="e#575#2057#0" />
                 <element signature="e#2113#2845#0" />
-                <element signature="e#2849#4457#0" />
                 <element signature="e#4506#5186#0" />
                 <element signature="e#5238#5917#0" />
                 <element signature="e#5954#6813#0" />
                 <element signature="e#6853#16780#0" />
-                <element signature="e#16839#21763#0" />
                 <element signature="n#!!block;n#getListByDay#0" />
                 <element signature="e#22066#22243#0" />
                 <element signature="e#22294#22327#0" />
@@ -123,7 +127,6 @@
                 <element signature="e#23312#23517#0" />
                 <element signature="e#23546#29490#0" />
                 <element signature="e#29540#29590#0" />
-                <element signature="e#29643#30229#0" />
                 <element signature="e#31004#33221#0" />
                 <element signature="e#33273#34074#0" />
                 <element signature="e#34125#34924#0" />
@@ -135,8 +138,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.env">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" column="69" lean-forward="true" selection-start-line="3" selection-start-column="69" selection-end-line="3" selection-end-column="69" />
+            <state relative-caret-position="68">
+              <caret line="4" column="128" selection-start-line="4" selection-start-column="128" selection-end-line="4" selection-end-column="128" />
             </state>
           </provider>
         </entry>
@@ -144,8 +147,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/location.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="48" column="5" lean-forward="true" selection-start-line="48" selection-start-column="5" selection-end-line="48" selection-end-column="5" />
+            <state relative-caret-position="85">
+              <caret line="5" selection-start-line="5" selection-end-line="5" />
             </state>
           </provider>
         </entry>
@@ -153,8 +156,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/memories.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="67">
-              <caret line="31" column="33" lean-forward="true" selection-start-line="30" selection-start-column="3" selection-end-line="31" selection-end-column="33" />
+            <state relative-caret-position="51">
+              <caret line="3" selection-start-line="3" selection-end-line="3" />
             </state>
           </provider>
         </entry>
@@ -162,7 +165,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/speech.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2482">
+            <state relative-caret-position="1989">
               <caret line="147" column="36" selection-start-line="147" selection-start-column="36" selection-end-line="147" selection-end-column="36" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
@@ -193,11 +196,11 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/routes/tasks.js" />
-        <option value="$PROJECT_DIR$/routes/memories.js" />
         <option value="$PROJECT_DIR$/routes/speech.js" />
-        <option value="$PROJECT_DIR$/routes/location.js" />
         <option value="$PROJECT_DIR$/.env" />
+        <option value="$PROJECT_DIR$/routes/tasks.js" />
+        <option value="$PROJECT_DIR$/routes/location.js" />
+        <option value="$PROJECT_DIR$/routes/memories.js" />
         <option value="$PROJECT_DIR$/routes/index.js" />
       </list>
     </option>
@@ -218,7 +221,7 @@
       <path value="$PROJECT_DIR$/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-8" />
     <option name="width" value="977" />
     <option name="height" value="1038" />
@@ -279,12 +282,12 @@
       <workItem from="1576059070548" duration="14230000" />
       <workItem from="1576173275612" duration="21193000" />
       <workItem from="1576272108952" duration="9647000" />
-      <workItem from="1576337499084" duration="7519000" />
+      <workItem from="1576337499084" duration="8301000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="52589000" />
+    <option name="totallyTimeSpent" value="53371000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -340,7 +343,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/routes/index.js</url>
-          <line>644</line>
+          <line>465</line>
           <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="2" />
         </line-breakpoint>
@@ -369,27 +372,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/speech.js">
+    <entry file="file://$PROJECT_DIR$/.env">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2482">
-          <caret line="147" column="36" selection-start-line="147" selection-start-column="36" selection-end-line="147" selection-end-column="36" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/memories.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="67">
-          <caret line="31" column="33" lean-forward="true" selection-start-line="30" selection-start-column="3" selection-end-line="31" selection-end-column="33" />
+        <state relative-caret-position="68">
+          <caret line="4" column="128" selection-start-line="4" selection-start-column="128" selection-end-line="4" selection-end-column="128" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/tasks.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-306">
-          <caret selection-end-column="49" />
+        <state relative-caret-position="68">
+          <caret line="4" selection-start-line="4" selection-end-line="4" selection-end-column="50" />
           <folding>
             <element signature="e#1165#1827#0" />
           </folding>
@@ -398,32 +391,40 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/location.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="48" column="5" lean-forward="true" selection-start-line="48" selection-start-column="5" selection-end-line="48" selection-end-column="5" />
+        <state relative-caret-position="85">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.env">
+    <entry file="file://$PROJECT_DIR$/routes/memories.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
-          <caret line="3" column="69" lean-forward="true" selection-start-line="3" selection-start-column="69" selection-end-line="3" selection-end-column="69" />
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/speech.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1989">
+          <caret line="147" column="36" selection-start-line="147" selection-start-column="36" selection-end-line="147" selection-end-column="36" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
-          <caret line="858" column="81" selection-start-line="858" selection-start-column="81" selection-end-line="858" selection-end-column="81" />
+        <state relative-caret-position="150">
+          <caret line="679" selection-start-line="679" selection-end-line="680" />
           <folding>
             <element signature="e#471#517#0" />
             <element signature="e#575#2057#0" />
             <element signature="e#2113#2845#0" />
-            <element signature="e#2849#4457#0" />
             <element signature="e#4506#5186#0" />
             <element signature="e#5238#5917#0" />
             <element signature="e#5954#6813#0" />
             <element signature="e#6853#16780#0" />
-            <element signature="e#16839#21763#0" />
             <element signature="n#!!block;n#getListByDay#0" />
             <element signature="e#22066#22243#0" />
             <element signature="e#22294#22327#0" />
@@ -433,7 +434,6 @@
             <element signature="e#23312#23517#0" />
             <element signature="e#23546#29490#0" />
             <element signature="e#29540#29590#0" />
-            <element signature="e#29643#30229#0" />
             <element signature="e#31004#33221#0" />
             <element signature="e#33273#34074#0" />
             <element signature="e#34125#34924#0" />
