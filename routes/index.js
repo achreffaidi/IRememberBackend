@@ -29,12 +29,7 @@ router.post('/memories/add', function(req, res, next) {
 try {
 
     var  {title,description,date} = req.headers;
-
     console.log(req.body);
-
-
-
-
         var filePath;
         var fileName;
         var form = new formidable.IncomingForm();
@@ -116,7 +111,7 @@ router.get('/memoryImage/:fileName',  (req,res) => {
     })
 });
 
-
+/*
 router.get('/memories', function(req, res, next) {
 
     const object = {"pictures" : [
@@ -152,7 +147,7 @@ router.get('/memories', function(req, res, next) {
 
     res.json(object);
 });
-
+*/
 
 
 
@@ -992,7 +987,7 @@ router.get('/objects', function(req, res, next) {
 
 });
 
-router.get('/speech', function(req, res, next) {
+router.post('/speech', function(req, res, next) {
 
     console.log(req.body);
     const {text} = req.body;
