@@ -856,6 +856,8 @@ router.get('/persons', function(req, res, next) {
 
 
     let persons = [];
+    console.log('=============================================================');
+    console.log(options);
     request.get(options, (error, responce, b) => {
 
         const body = JSON.parse(b);
