@@ -9,6 +9,7 @@ const env = require('dotenv').config();
 const speech = require('./speech');
 const tasksService = require('./tasks');
 const memoriesService = require('./memories');
+const locationService = require('./location');
 
 
 
@@ -1022,7 +1023,26 @@ router.post('/speech', function(req, res, next) {
 
 });
 
+router.post('/location', function(req, res, next) {
 
+    const {longitude,latitude} = req.body;
+
+    if(!longitude || !latitude) {
+        res.statusCode = 400;
+        res.send();
+        return 0;
+    }else{
+        locationService.setLocation({lat:latitude,long:longitude});
+        res.statusCode = 200;
+        res.send();
+    }
+});
+
+router.get('/location', function(req, res, next) {
+
+    locationService.getLocation(res);
+
+});
 
 
 
