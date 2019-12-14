@@ -47,6 +47,7 @@ const tasksModel = mongoose.model('tasks', taskSchema);
 
 const addMongoose = (taskObject) => {
 
+
     length++;
     taskObject.id = length;
 
@@ -58,11 +59,15 @@ const addMongoose = (taskObject) => {
 };
 
 const getAllMongoose = async (res) => {
+
+    console.log('uri===============================================================================================================');
+    console.log(uri);
+
     var allTasks = [];
     const query = tasksModel.find();
     const p = query.exec();
     p.then( data => {
-        console.log(data);
+      //  console.log(data);
         length=data.length;
         data.forEach(task => {
         let  {id,day,time,title,done} = task;
