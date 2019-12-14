@@ -769,7 +769,7 @@ router.post('/uploadImage/:id', function(req, res, next) {
         };
 
         request.post(options2, (error2, responce2, body2) => {
-            if(err){
+            if(error2){
                 res.statusCode = 400;
                 res.send();
                 index = uuid();
