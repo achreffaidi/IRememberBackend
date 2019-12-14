@@ -848,9 +848,9 @@ router.post('/persons', function(req, res, next) {
 router.get('/persons', function(req, res, next) {
 
     const options = {
-        uri: 'https://westcentralus.api.cognitive.microsoft.com/face/v1.0/persongroups/friends/persons?start=0&top=1000',
+        uri: process.env.FACE_API_HOST+'persongroups/friends/persons?start=1&top=1000',
         headers: {
-            'Ocp-Apim-Subscription-Key' : '85f31ab908714e0893cbf82faee8b026'
+            'Ocp-Apim-Subscription-Key' : process.env.FACE_API_KEY
         }
     };
 
