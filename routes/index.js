@@ -78,6 +78,27 @@ try {
     });
 
 
+router.post('/memories/delete/:pictureId', function(req, res, next) {
+
+
+
+    const {pictureId} = req.params;
+
+    console.log(pictureId);
+
+    if(!pictureId){
+        res.statusCode = 400;
+        res.send();
+        return 0;
+    }else {
+
+        memoriesService.removeMemory(pictureId,res);
+
+    }
+
+});
+
+
 router.get('/memoryImage/:fileName',  (req,res) => {
 
     const {fileName} = req.params;

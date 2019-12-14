@@ -67,8 +67,16 @@ const addMemoryMongoose = (memory) => {
 
 const removeMemoryMongoose = (id ,res) => {
 
-    const promise =  memoryModel.deleteOne({pictureId: id},taskObject, err => {
-        if (err) throw new Error();
+    const promise =  memoryModel.deleteOne({pictureId: id},{}, err => {
+        if (err){
+            res.statusCode = 400;
+            res.send();
+            return 0;
+        }else {
+            res.statusCode = 200;
+            res.send();
+            return 0;
+        }
     });
 
 }
