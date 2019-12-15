@@ -7,21 +7,7 @@ mongoose.connect(uri, {useNewUrlParser: true});
 
 var length ;
 
-const connectDb = () => {
-    return mongoose.connect(uri);
-};
 
-const add = (taskObject) => {
-    try {
-        client.connect(err => {
-            const collection = client.db("IRemember").collection("tasks");
-            collection.insert(taskObject);
-            client.close();
-        });
-    }catch (e) {
-        console.log(e.message);
-    }
-};
 
 
 const taskSchema = new mongoose.Schema({

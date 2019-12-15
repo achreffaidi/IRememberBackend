@@ -11,6 +11,7 @@ const tasksService = require('./tasks');
 const memoriesService = require('./memories');
 const locationService = require('./location');
 var Jimp = require('jimp');
+const scoreService = require('./score');
 
 
 
@@ -462,18 +463,6 @@ router.post('/achref',  (req,res) => {
         return 0;
     }
 });
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 function getListByDay(day){
@@ -1913,6 +1902,22 @@ router.get('/location', function(req, res, next) {
 
 });
 
+router.get('/getScore', function(req, res, next) {
+
+    scoreService.getAllScores(res);
+
+});
+
+router.post('/setScore', function(req, res, next) {
+
+
+    console.log(req.body);
+    var {points, date} = req.body;
+
+        scoreService.addScore(points,date,res);
+
+
+});
 
 
 
