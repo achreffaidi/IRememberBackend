@@ -272,7 +272,7 @@ router.post('/achref',  (req,res) => {
             Jimp.read(filePath)
                 .then( image => {
                     return image
-                        .rotate(90)
+                        .rotate(-90)
                         .write(filePath);
                 } ).catch(err => {
                     console.error(err);
