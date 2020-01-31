@@ -131,7 +131,7 @@ const textToSpeech  = (accessToken, res, text) => {
                     console.log('\nYour file is ready.\n');
 
                     res.statusCode = 200;
-                    res.setHeader(  'voice', 'https://i-remember.azurewebsites.net/speech/'+speechName);
+                    res.setHeader(  'voice', 'https://i-remember2.azurewebsites.net/speech/'+speechName);
                     index = uuid();
                     res.send();
                     index = uuid();
