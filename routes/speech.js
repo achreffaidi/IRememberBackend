@@ -70,7 +70,7 @@ const textToSpeechForIdentification  = (accessToken, res, person) => {
                             res.statusCode = 200;
                             res.setHeader(  'name', person.name);
                             res.setHeader(  'userData', person.userData);
-                            res.setHeader(  'voice', 'https://i-remember.azurewebsites.net/speech/'+speechName);
+                            res.setHeader(  'voice', 'https://i-remember2.azurewebsites.net/speech/'+speechName);
                             index = uuid();
                             res.json(person);
                             index = uuid();
