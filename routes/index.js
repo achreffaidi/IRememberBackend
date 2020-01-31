@@ -61,7 +61,7 @@ try {
                 description: description,
                 date: date,
                 pictureId: 'p'+index,
-                pictureUrl: 'https://i-remember.azurewebsites.net/memoryImage/'+fileName
+                pictureUrl: 'https://i-remember2.azurewebsites.net/memoryImage/'+fileName
             };
             console.log(memory);
             memoriesService.addMemory(memory);
@@ -301,7 +301,7 @@ router.post('/achref',  (req,res) => {
             //    });
 
 
-                    const imageUrl = 'https://i-remember.azurewebsites.net/image/'+fileName ;
+                    const imageUrl = 'https://i-remember2.azurewebsites.net/image/'+fileName ;
                     const options = {
                         uri: process.env.FACE_API_HOST+'detect?returnFaceId=true&returnFaceLandmarks=false&recognitionModel=recognition_01&returnRecognitionModel=false&detectionModel=detection_01',
                         headers: {
@@ -786,7 +786,7 @@ router.post('/uploadImage/:id', function(req, res, next) {
 
     const personId = req.params.id;
 
-    const imageUrl = 'https://i-remember.azurewebsites.net/image/'+index+'.png' ;
+    const imageUrl = 'https://i-remember2.azurewebsites.net/image/'+index+'.png' ;
  //   const imageUrl = 'https://bioit.blob.core.windows.net/bioit/'+index+'.jpg' ;
 
     const  options = {
