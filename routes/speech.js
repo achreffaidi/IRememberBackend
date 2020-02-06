@@ -186,7 +186,7 @@ const listOfVoices = (req,res) => {
                         break;
                 }
             }
-            res.send(voices);
+            res.json({list: voices});
         })
     })
 }
