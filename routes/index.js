@@ -12,6 +12,7 @@ const memoriesService = require('./memories');
 const locationService = require('./location');
 var Jimp = require('jimp');
 const scoreService = require('./score');
+const photosgameService = require('./photosgame')
 
 
 
@@ -948,7 +949,15 @@ router.post('/setScore', function(req, res, next) {
 router.get('/listOfVoices',(req,res)=>{
     speech.listOfVoices(req,res);
 
-})
+});
+
+router.get('/photosGame/game',(req,res)=>{
+
+    const {image1,image2} = req.headers;
+
+    photosgameService.imageLinks(image1,image2,res);
+
+});
 
 
 
