@@ -945,7 +945,10 @@ router.post('/setScore', function(req, res, next) {
 });
 
 
+router.get('/listOfVoices',(req,res)=>{
+    speech.listOfVoices(req,res);
 
+})
 
 
 

@@ -9,6 +9,7 @@ const readline = require('readline-sync');
 const xmlbuilder = require('xmlbuilder');
 const env = require('dotenv').config();
 var uuid = require('uuid');
+const reque= require('request');
 
 
 
@@ -142,7 +143,54 @@ const textToSpeech  = (accessToken, res, text) => {
         console.log(e);
     }
 }
+const listOfVoices = (req,res) => {
 
+    const options = {
+        uri: 'https://westeurope.api.cognitive.microsoft.com/sts/v1.0/issueToken',
+        headers: {
+            'Ocp-Apim-Subscription-Key': '0e38c11dd96a45c2a701a6e9243a62de',
+            'Host': 'westeurope.api.cognitive.microsoft.com',
+            'Content-type': 'application/x-www-form-urlencoded',
+            'Content-Length': 0
+        }
+    };
 
+    reque.post(options, (errToken,responceToken,bodyToken) => {
+
+        const options2 = {
+            url: 'https://westeurope.tts.speech.microsoft.com/cognitiveservices/voices/list',
+            headers: {
+                'Authorization' : 'Bearer '+bodyToken
+
+            }
+        };
+        reque.get(options2,(err,resp,body)=>{
+
+            var voices = []
+            body= JSON.parse(body);
+            var male=2 , fem=2;
+            for (let elem of body ) {
+                if(elem.SampleRateHertz === '16000' && elem.Locale.search("en")!==-1)
+                {
+                    if(elem.Gender === "Male" && male > 0)
+                    {
+                        male--;
+                        voices.push(elem);
+                    }
+                    else if(elem.Gender === "Female" && fem > 0)
+                    {
+                        fem--;
+                        voices.push(elem);
+                    }
+                    if(fem === male && male === 0)
+                        break;
+                }
+            }
+            res.send(voices);
+        })
+    })
+}
+
+exports.listOfVoices = listOfVoices;
 exports.textToSpeechForIdentification = textToSpeechForIdentification;
 exports.textToSpeech = textToSpeech;
