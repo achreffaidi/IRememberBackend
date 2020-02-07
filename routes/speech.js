@@ -14,7 +14,14 @@ const reque= require('request');
 
 
 var index = uuid();
-
+var voiceSpeech = {
+            "Name": "Microsoft Server Speech Text to Speech Voice (en-GB, George, Apollo)",
+            "ShortName": "en-GB-George-Apollo",
+            "Gender": "Male",
+            "Locale": "en-GB",
+            "SampleRateHertz": "16000",
+            "VoiceType": "Standard"
+        };
 
 
 
@@ -84,16 +91,26 @@ const textToSpeechForIdentification  = (accessToken, res, person) => {
 }
 
 
-const textToSpeech  = (accessToken, res, text) => {
-
+const textToSpeech  = (accessToken, res, text,voice) => {
+    if (typeof voice === 'undefined')
+    {
+        voice = {
+            "Name": "Microsoft Server Speech Text to Speech Voice (en-GB, George, Apollo)",
+            "ShortName": "en-GB-George-Apollo",
+            "Gender": "Male",
+            "Locale": "en-GB",
+            "SampleRateHertz": "16000",
+            "VoiceType": "Standard"
+        };
+    }
     try {
         // Create the SSML request.
         let xml_body = xmlbuilder.create('speak')
             .att('version', '1.0')
-            .att('xml:lang', 'en-GB')
+            .att('xml:lang', voice.Locale)
             .ele('voice')
-            .att('xml:lang', 'en-GB')
-            .att('name', 'Microsoft Server Speech Text to Speech Voice (en-GB, George, Apollo)')
+            .att('xml:lang', voice.Locale)
+            .att('name', voice.Name)
             .txt(text)
             .end();
         // Convert the XML into a string to send in the TTS request.
@@ -143,12 +160,13 @@ const textToSpeech  = (accessToken, res, text) => {
         console.log(e);
     }
 }
+
 const listOfVoices = (req,res) => {
 
     const options = {
         uri: 'https://westeurope.api.cognitive.microsoft.com/sts/v1.0/issueToken',
         headers: {
-            'Ocp-Apim-Subscription-Key': '0e38c11dd96a45c2a701a6e9243a62de',
+            'Ocp-Apim-Subscription-Key': process.env.SPEECH_API_KEY,
             'Host': 'westeurope.api.cognitive.microsoft.com',
             'Content-type': 'application/x-www-form-urlencoded',
             'Content-Length': 0
@@ -191,6 +209,45 @@ const listOfVoices = (req,res) => {
     })
 }
 
+const findVoice = (voiceShortname) =>{
+
+    const options = {
+        uri: 'https://westeurope.api.cognitive.microsoft.com/sts/v1.0/issueToken',
+        headers: {
+            'Ocp-Apim-Subscription-Key': process.env.SPEECH_API_KEY,
+            'Host': 'westeurope.api.cognitive.microsoft.com',
+            'Content-type': 'application/x-www-form-urlencoded',
+            'Content-Length': 0
+        }
+    };
+
+    reque.post(options, (errToken,responseToken,bodyToken) => {
+        console.log(bodyToken);
+        const options2 = {
+            url: 'https://westeurope.tts.speech.microsoft.com/cognitiveservices/voices/list',
+            headers: {
+                'Authorization' : 'Bearer '+bodyToken
+
+            }
+        };
+        reque.get(options2,(err,resp,body)=>{
+
+            body= JSON.parse(body);
+
+            for (let elem of body ) {
+                if(elem.ShortName === voiceShortname)
+                {
+                    voiceSpeech = elem;
+                    break;
+                }
+            }
+
+        })
+    })
+    return voiceSpeech;
+}
+
 exports.listOfVoices = listOfVoices;
 exports.textToSpeechForIdentification = textToSpeechForIdentification;
 exports.textToSpeech = textToSpeech;
+exports.findVoice = findVoice;
