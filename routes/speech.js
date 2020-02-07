@@ -14,7 +14,14 @@ const reque= require('request');
 
 
 var index = uuid();
-var voiceSpeech ;
+var voiceSpeech = {
+            "Name": "Microsoft Server Speech Text to Speech Voice (en-GB, George, Apollo)",
+            "ShortName": "en-GB-George-Apollo",
+            "Gender": "Male",
+            "Locale": "en-GB",
+            "SampleRateHertz": "16000",
+            "VoiceType": "Standard"
+        };
 
 
 
@@ -214,7 +221,7 @@ const findVoice = (voiceShortname) =>{
         }
     };
 
-    request.post(options, (errToken,responseToken,bodyToken) => {
+    reque.post(options, (errToken,responseToken,bodyToken) => {
         console.log(bodyToken);
         const options2 = {
             url: 'https://westeurope.tts.speech.microsoft.com/cognitiveservices/voices/list',
@@ -223,7 +230,7 @@ const findVoice = (voiceShortname) =>{
 
             }
         };
-        request.get(options2,(err,resp,body)=>{
+        reque.get(options2,(err,resp,body)=>{
 
             body= JSON.parse(body);
 
