@@ -893,7 +893,7 @@ router.post('/speech', function(req, res, next) {
 
         request.post(options, (err,responce,body) => {
             const token = body;
-            speech.textToSpeech(token, res,text);
+            speech.textToSpeech(token, res,text,undefined);
             return 0 ;
         });
       //  res.json({});
@@ -959,6 +959,34 @@ router.get('/photosGame/game',(req,res)=>{
 
 });
 
+router.get('/getVoiceSimple', (req,res)=>{
+
+    var voice =speech.findVoice(req.headers.shortname);
+
+    try {
+        const options = {
+            uri: 'https://westeurope.api.cognitive.microsoft.com/sts/v1.0/issueToken',
+            headers: {
+                'Ocp-Apim-Subscription-Key': process.env.SPEECH_API_KEY,
+                'Host': 'westeurope.api.cognitive.microsoft.com',
+                'Content-type': 'application/x-www-form-urlencoded',
+                'Content-Length': 0
+            }
+        };
+
+        request.post(options, (err,response,body) => {
+            const token = body;
+            speech.textToSpeech(token, res,"This is a test example.",voice);
+            return 0 ;
+        });
+        //  res.json({});
+
+    }catch (e) {
+        console.log(e);
+        res.json({});
+    }
+
+});
 
 
 module.exports = router;
