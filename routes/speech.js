@@ -10,34 +10,41 @@ const xmlbuilder = require('xmlbuilder');
 const env = require('dotenv').config();
 var uuid = require('uuid');
 const reque= require('request');
+var mongoose =require('mongoose');
 
+const uri = "mongodb+srv://RedWalls:Redwalls123@cluster0-zesmx.azure.mongodb.net/IRemember?retryWrites=true&w=majority";
 
 
 var index = uuid();
-var voiceSpeech = {
-            "Name": "Microsoft Server Speech Text to Speech Voice (en-GB, George, Apollo)",
-            "ShortName": "en-GB-George-Apollo",
-            "Gender": "Male",
-            "Locale": "en-GB",
-            "SampleRateHertz": "16000",
-            "VoiceType": "Standard"
-        };
+mongoose.connect(uri, {useNewUrlParser: true});
 
+const voiceSchema = mongoose.Schema({
+
+    Name: String,
+    ShortName: String,
+    Gender: String,
+    Locale: String,
+    SampleRateHertz: String,
+    VoiceType: String
+});
+
+
+const Voice =mongoose.model('Voice',voiceSchema);
 
 
 // Make sure to update User-Agent with the name of your resource.
 // You can also change the voice and output formats. See:
 // https://docs.microsoft.com/azure/cognitive-services/speech-service/language-support#text-to-speech
 const textToSpeechForIdentification  = (accessToken, res, person) => {
-
+    Voice.findOne({SampleRateHertz: '16000'}).exec().then(docs=>{
     try {
         // Create the SSML request.
         let xml_body = xmlbuilder.create('speak')
             .att('version', '1.0')
-            .att('xml:lang', 'en-GB')
+            .att('xml:lang', docs.Locale)
             .ele('voice')
-            .att('xml:lang', 'en-GB')
-            .att('name', 'Microsoft Server Speech Text to Speech Voice (en-GB, George, Apollo)')
+            .att('xml:lang', docs.Locale)
+            .att('name', docs.Name)
             .txt(person.name+' .   '+person.userData)
             .end();
         // Convert the XML into a string to send in the TTS request.
@@ -88,6 +95,10 @@ const textToSpeechForIdentification  = (accessToken, res, person) => {
     }catch (e) {
         console.log(e);
     }
+    }).catch(err =>{
+        console.log(err);
+        res.status(500).send(err);
+    })
 }
 
 
@@ -209,7 +220,7 @@ const listOfVoices = (req,res) => {
     })
 }
 
-const findVoice = (voiceShortname) =>{
+const findVoice = (voiceShortname,res) =>{
 
     const options = {
         uri: 'https://westeurope.api.cognitive.microsoft.com/sts/v1.0/issueToken',
@@ -237,16 +248,78 @@ const findVoice = (voiceShortname) =>{
             for (let elem of body ) {
                 if(elem.ShortName === voiceShortname)
                 {
-                    voiceSpeech = elem;
+                    try {
+                            textToSpeech(bodyToken, res,"This is a test example.",elem);
+                            //  res.json({});
+                    }catch (e) {
+                        console.log(e);
+                        res.json({});
+                    }
+
                     break;
                 }
             }
 
+        });
+    });
+
+};
+const getVoice =  (res)=>{
+    Voice.findOne({SampleRateHertz: '16000'}).exec().then(docs=>{
+        res.status(200).send(docs.ShortName);
+    }).catch(err =>{
+        console.log(err);
+        res.status(500).send(err);
+    })
+};
+
+const setVoice= (shortname,res)=>{
+    var voiceSpeech;
+    const options = {
+        uri: 'https://westeurope.api.cognitive.microsoft.com/sts/v1.0/issueToken',
+        headers: {
+            'Ocp-Apim-Subscription-Key': process.env.SPEECH_API_KEY,
+            'Host': 'westeurope.api.cognitive.microsoft.com',
+            'Content-type': 'application/x-www-form-urlencoded',
+            'Content-Length': 0
+        }
+    };
+
+    reque.post(options, (errToken,responseToken,bodyToken) => {
+        console.log(bodyToken);
+        const options2 = {
+            url: 'https://westeurope.tts.speech.microsoft.com/cognitiveservices/voices/list',
+            headers: {
+                'Authorization' : 'Bearer '+bodyToken
+
+            }
+        };
+        reque.get(options2,(err,resp,body)=>{
+
+            body= JSON.parse(body);
+
+            for (let elem of body ) {
+                if(elem.ShortName === shortname)
+                {
+                    Voice.replaceOne({SampleRateHertz:'16000'},elem).exec().then(result=>{
+                        res.send(result);
+                    }).catch(err =>{
+                        console.log(err);
+                        res.send(err);
+                    });
+
+                }
+            }
+
+
         })
     })
-    return voiceSpeech;
-}
 
+};
+
+
+exports.getVoice=getVoice;
+exports.setVoice=setVoice;
 exports.listOfVoices = listOfVoices;
 exports.textToSpeechForIdentification = textToSpeechForIdentification;
 exports.textToSpeech = textToSpeech;

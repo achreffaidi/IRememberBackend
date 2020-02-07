@@ -18,6 +18,7 @@ const photosgameService = require('./photosgame')
 
 
 
+
 var index = uuid();
 
 
@@ -961,30 +962,8 @@ router.get('/photosGame/game',(req,res)=>{
 
 router.get('/getVoiceSimple', (req,res)=>{
 
-    var voice =speech.findVoice(req.headers.shortname);
+    var voice =speech.findVoice(req.headers.shortname,res);
 
-    try {
-        const options = {
-            uri: 'https://westeurope.api.cognitive.microsoft.com/sts/v1.0/issueToken',
-            headers: {
-                'Ocp-Apim-Subscription-Key': process.env.SPEECH_API_KEY,
-                'Host': 'westeurope.api.cognitive.microsoft.com',
-                'Content-type': 'application/x-www-form-urlencoded',
-                'Content-Length': 0
-            }
-        };
-
-        request.post(options, (err,response,body) => {
-            const token = body;
-            speech.textToSpeech(token, res,"This is a test example.",voice);
-            return 0 ;
-        });
-        //  res.json({});
-
-    }catch (e) {
-        console.log(e);
-        res.json({});
-    }
 
 });
 
@@ -993,7 +972,6 @@ router.get('/photosGame/getCategories',(req,res)=>{
     photosgameService.getAllCategories(res);
 
 });
-
 
 router.post('/photosGame/setCategoriesToChosen',(req,res)=>{
 
@@ -1005,5 +983,12 @@ router.post('/photosGame/setCategoriesToChosen',(req,res)=>{
 
 });
 
+router.get('/getVoiceChoice',(req,res)=>{
+    speech.getVoice(res);
+});
+
+router.get('/setVoiceChoice',(req,res)=>{
+    speech.setVoice(req.headers.shortname,res);
+});
 
 module.exports = router;
