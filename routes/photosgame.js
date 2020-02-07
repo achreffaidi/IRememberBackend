@@ -5,7 +5,8 @@ let path = process.env.BING_IMAGE_ENDPOINT;
 
 var mongoose =require('mongoose');
 
-const uri = "mongodb+srv://redwalls:redwalls@cluster0-jivu8.azure.mongodb.net/IRemember?retryWrites=true&w=majority";
+const uri = "mongodb+srv://RedWalls:Redwalls123@cluster0-zesmx.azure.mongodb.net/IRemember?retryWrites=true&w=majority";
+
 mongoose.connect(uri, {useNewUrlParser: true});
 
 
@@ -23,6 +24,8 @@ const photosGameSchema = new mongoose.Schema({
 });
 
 const photosgameModel = new mongoose.model('photosgames',photosGameSchema);
+
+
 
 
 const imageLinks = async (image1,image2,res) => {
