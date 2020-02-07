@@ -85,7 +85,7 @@ const textToSpeechForIdentification  = (accessToken, res, person) => {
 
 
 const textToSpeech  = (accessToken, res, text,voice) => {
-    if (typeof voice !== 'undefined')
+    if (typeof voice === 'undefined')
     {
         voice = {
             "Name": "Microsoft Server Speech Text to Speech Voice (en-GB, George, Apollo)",
