@@ -960,5 +960,22 @@ router.get('/photosGame/game',(req,res)=>{
 });
 
 
+router.get('/photosGame/getCategories',(req,res)=>{
+
+    photosgameService.getAllCategories(res);
+
+});
+
+
+router.post('/photosGame/setCategoriesToChosen',(req,res)=>{
+
+
+    const {categories} = req.body;
+
+    console.log(categories);
+    photosgameService.setCategoriesToChosen(categories,res);
+
+});
+
 
 module.exports = router;
