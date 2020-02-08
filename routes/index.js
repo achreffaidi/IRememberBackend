@@ -12,8 +12,8 @@ const memoriesService = require('./memories');
 const locationService = require('./location');
 var Jimp = require('jimp');
 const scoreService = require('./score');
-const photosgameService = require('./photosgame')
-
+const photosgameService = require('./photosgame');
+const stateService=require('./phoneState');
 
 
 
@@ -989,6 +989,17 @@ router.get('/getVoiceChoice',(req,res)=>{
 
 router.get('/setVoiceChoice',(req,res)=>{
     speech.setVoice(req.headers.shortname,res);
+});
+
+router.get('/getPhoneState',(req,res)=>{
+
+    stateService.getState(res);
+
+});
+
+router.get('/setPhoneState',(req,res)=>{
+
+    stateService.setState(req,res);
 });
 
 module.exports = router;
