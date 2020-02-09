@@ -50,6 +50,9 @@ const taskSchema = new mongoose.Schema({
     },
     voice: {
         type: String
+    },
+    name: {
+        type:String
     }
 });
 
@@ -104,7 +107,8 @@ function textToSpeech(accessToken, text, voice) {
         .on('response', (response) => {
             if (response.statusCode === 200) {
                 request.pipe(fs.createWriteStream('D:/home/site/wwwroot/speech/'+index+'.mp3'));
-                index = uuid();
+              //  request.pipe(fs.createWriteStream(index+'.mp3'));
+
                 console.log('\nYour file is ready.\n')
             }
         });
@@ -138,11 +142,6 @@ const  main= async (text, voiceName) => {
 
 const addMongoose = async (taskObject) => {
 
-
-
-
-
-
     const voice = await  voiceModel.find();
     taskObject.voice = voice[0].ShortName;
     //console.log(voice);
@@ -151,6 +150,8 @@ const addMongoose = async (taskObject) => {
     await main(taskObject.description,voice[0]);
 
     taskObject.voiceLink = 'https://i-remember2.azurewebsites.net/speech/'+index+'.mp3';
+    taskObject.name = index+'.mp3';
+
    // console.log(taskObject);
 
     const t = new tasksModel(taskObject);
@@ -159,6 +160,7 @@ const addMongoose = async (taskObject) => {
     t.save( err => {
         console.error(err);
     } );
+    index = uuid();
 
 
 

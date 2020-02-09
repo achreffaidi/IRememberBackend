@@ -895,6 +895,8 @@ router.post('/speech', function(req, res, next) {
         request.post(options, (err,responce,body) => {
             const token = body;
             speech.textToSpeech(token, res,text,undefined);
+            res.statusCode = 200;
+            res.send();
             return 0 ;
         });
       //  res.json({});
