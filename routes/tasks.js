@@ -30,7 +30,8 @@ const taskSchema = new mongoose.Schema({
         type: Number
     },
     done: {
-        type: Boolean
+        type: Boolean,
+        default: false
     },
     title: {
         type: String
@@ -73,7 +74,7 @@ function getAccessToken(subscriptionKey) {
     return rp(options);
 };
 
-function textToSpeech(accessToken, text, voice) {
+function textToSpeech(accessToken, text, voice, name) {
 
    // console.log(voice);
     // Create the SSML request.
@@ -106,8 +107,8 @@ function textToSpeech(accessToken, text, voice) {
     let request = rp(options)
         .on('response', (response) => {
             if (response.statusCode === 200) {
-                request.pipe(fs.createWriteStream('D:/home/site/wwwroot/speech/'+index+'.mp3'));
-              //  request.pipe(fs.createWriteStream(index+'.mp3'));
+              //  request.pipe(fs.createWriteStream('D:/home/site/wwwroot/speech/'+name+'.mp3'));
+                request.pipe(fs.createWriteStream(index+'.mp3'));
 
                 console.log('\nYour file is ready.\n')
             }
@@ -115,7 +116,7 @@ function textToSpeech(accessToken, text, voice) {
     return request;
 }
 
-const  main= async (text, voiceName) => {
+const  main= async (text, voiceName, name) => {
   //  console.log(voiceName)
     // Reads subscription key from env variable.
     // You can replace this with a string containing your subscription key. If
@@ -131,7 +132,7 @@ const  main= async (text, voiceName) => {
 
     try {
         const accessToken = await getAccessToken(subscriptionKey);
-        await textToSpeech(accessToken, text,voiceName);
+        await textToSpeech(accessToken, text,voiceName, name);
     } catch (err) {
         console.log(`Something went wrong: ${err}`);
     }
@@ -147,7 +148,7 @@ const addMongoose = async (taskObject) => {
     //console.log(voice);
 
 
-    await main(taskObject.description,voice[0]);
+    await main(taskObject.title+ ' . ' + taskObject.description, voice[0], index);
 
     taskObject.voiceLink = 'https://i-remember2.azurewebsites.net/speech/'+index+'.mp3';
     taskObject.name = index+'.mp3';
@@ -171,18 +172,42 @@ const getAllMongoose = async (res) => {
     var allTasks = [];
     const query = tasksModel.find();
     const p = query.exec();
-    p.then( data => {
+    p.then(  data => {
      //   console.log(data);
         length=data.length;
-        data.forEach(task => {
-        let  {id,day,time,title,done} = task;
+        data.forEach( async task => {
+        let  {day,time,title,done,image,description,priority,voiceLink,name,voice} = task;
         let obj = {
-            id: id,
             day: day,
             time: time,
             title:title,
-            done: done
+            done: done,
+            image: image,
+            description: description,
+            priority: priority,
+            voiceLink: voiceLink
         };
+
+
+            let voiceChoice = await  voiceModel.find();
+            let   voiceChoiceShortName = voiceChoice[0].ShortName;
+
+            if(voiceChoiceShortName === voice){
+
+            } else {
+
+                await main(title+ ' . ' + description, voiceChoice[0], name );
+
+            }
+
+
+
+
+
+
+
+
+
         allTasks.push(obj);
         });
         res.statusCode=200;
