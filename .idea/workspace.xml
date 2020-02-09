@@ -99,15 +99,15 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="env" value="37" />
-          <entry key="js" value="2768" />
-          <entry key="txt" value="52" />
+          <entry key="js" value="2811" />
+          <entry key="txt" value="81" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key=".env file" value="37" />
-          <entry key="JavaScript" value="2768" />
-          <entry key="PLAIN_TEXT" value="52" />
+          <entry key="JavaScript" value="2811" />
+          <entry key="PLAIN_TEXT" value="81" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -169,11 +169,12 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/routes/tasks.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="71">
-              <caret line="110" column="14" selection-start-line="110" selection-start-column="14" selection-end-line="110" selection-end-column="14" />
+            <state relative-caret-position="105">
+              <caret line="150" column="80" selection-start-line="150" selection-start-column="80" selection-end-line="150" selection-end-column="80" />
               <folding>
                 <element signature="e#231#288#0" />
                 <element signature="n#!!block;n#getAccessToken#0" />
+                <element signature="e#2694#3411#0" />
               </folding>
             </state>
           </provider>
@@ -194,8 +195,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="287">
-              <caret line="984" column="3" lean-forward="true" selection-start-line="984" selection-start-column="3" selection-end-line="984" selection-end-column="3" />
+            <state relative-caret-position="164">
+              <caret line="519" column="21" selection-start-line="519" selection-start-column="13" selection-end-line="519" selection-end-column="21" />
               <folding>
                 <element signature="e#17948#28597#0" />
               </folding>
@@ -225,6 +226,7 @@
       <find>request</find>
       <find>findV</find>
       <find>text</find>
+      <find>addTa</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -264,9 +266,9 @@
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="950" />
-    <option name="width" value="979" />
-    <option name="height" value="1040" />
+    <option name="x" value="952" />
+    <option name="width" value="977" />
+    <option name="height" value="1038" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -348,16 +350,24 @@
       <option name="project" value="LOCAL" />
       <updated>1581253735688</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="update voice in tasks">
+      <created>1581255373122</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1581255373122</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="103924000" />
+    <option name="totallyTimeSpent" value="105121000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="762" y="0" width="781" height="830" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2967614" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.60349464" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -370,8 +380,8 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.40449437" side_tool="true" weight="0.30780143" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.5955056" visible="true" weight="0.30780143" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.40591398" side_tool="true" weight="0.31133428" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.59408605" visible="true" weight="0.31133428" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -408,7 +418,8 @@
     <MESSAGE value="change taskstructure ( add priority and voice link )" />
     <MESSAGE value="change task structure" />
     <MESSAGE value="change task structure, add priority and voice link" />
-    <option name="LAST_COMMIT_MESSAGE" value="change task structure, add priority and voice link" />
+    <MESSAGE value="update voice in tasks" />
+    <option name="LAST_COMMIT_MESSAGE" value="update voice in tasks" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/node_modules/express/lib/router/route.js">
@@ -487,16 +498,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="287">
-          <caret line="984" column="3" lean-forward="true" selection-start-line="984" selection-start-column="3" selection-end-line="984" selection-end-column="3" />
-          <folding>
-            <element signature="e#17948#28597#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/routes/speech.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2263">
@@ -507,13 +508,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/routes/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="164">
+          <caret line="519" column="21" selection-start-line="519" selection-start-column="13" selection-end-line="519" selection-end-column="21" />
+          <folding>
+            <element signature="e#17948#28597#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/routes/tasks.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="71">
-          <caret line="110" column="14" selection-start-line="110" selection-start-column="14" selection-end-line="110" selection-end-column="14" />
+        <state relative-caret-position="105">
+          <caret line="150" column="80" selection-start-line="150" selection-start-column="80" selection-end-line="150" selection-end-column="80" />
           <folding>
             <element signature="e#231#288#0" />
             <element signature="n#!!block;n#getAccessToken#0" />
+            <element signature="e#2694#3411#0" />
           </folding>
         </state>
       </provider>

@@ -107,8 +107,8 @@ function textToSpeech(accessToken, text, voice, name) {
     let request = rp(options)
         .on('response', (response) => {
             if (response.statusCode === 200) {
-              //  request.pipe(fs.createWriteStream('D:/home/site/wwwroot/speech/'+name+'.mp3'));
-                request.pipe(fs.createWriteStream(index+'.mp3'));
+                request.pipe(fs.createWriteStream('D:/home/site/wwwroot/speech/'+name));
+              //  request.pipe(fs.createWriteStream(index+'.mp3'));
 
                 console.log('\nYour file is ready.\n')
             }
@@ -116,7 +116,7 @@ function textToSpeech(accessToken, text, voice, name) {
     return request;
 }
 
-const  main= async (text, voiceName, name) => {
+const  createVoice= async (text, voiceName, name) => {
   //  console.log(voiceName)
     // Reads subscription key from env variable.
     // You can replace this with a string containing your subscription key. If
@@ -148,7 +148,7 @@ const addMongoose = async (taskObject) => {
     //console.log(voice);
 
 
-    await main(taskObject.title+ ' . ' + taskObject.description, voice[0], index);
+    await createVoice(taskObject.title+ ' . ' + taskObject.description, voice[0], index+'.mp3');
 
     taskObject.voiceLink = 'https://i-remember2.azurewebsites.net/speech/'+index+'.mp3';
     taskObject.name = index+'.mp3';
@@ -182,11 +182,13 @@ const getAllMongoose = async (res) => {
             time: time,
             title:title,
             done: done,
-            image: image,
             description: description,
             priority: priority,
             voiceLink: voiceLink
         };
+        if (image != null){
+            obj.image = image;
+        }
 
 
             let voiceChoice = await  voiceModel.find();
@@ -196,7 +198,7 @@ const getAllMongoose = async (res) => {
 
             } else {
 
-                await main(title+ ' . ' + description, voiceChoice[0], name );
+                await createVoice(title+ ' . ' + description, voiceChoice[0], name );
 
             }
 
