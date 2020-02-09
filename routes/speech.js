@@ -7,7 +7,7 @@ const fs = require('fs');
 const readline = require('readline-sync');
 // Requires xmlbuilder to build the SSML body
 const xmlbuilder = require('xmlbuilder');
-const env = require('dotenv').config();
+
 var uuid = require('uuid');
 const reque= require('request');
 var mongoose =require('mongoose');
@@ -64,7 +64,7 @@ const textToSpeechForIdentification  = (accessToken, res, person) => {
                 'Content-Type': 'application/ssml+xml'
             },
             body: body
-        }
+        };
 
 
         const speechName = 'speech'+ index + '.mp3';
@@ -99,7 +99,7 @@ const textToSpeechForIdentification  = (accessToken, res, person) => {
         console.log(err);
         res.status(500).send(err);
     })
-}
+};
 
 
 const textToSpeech  = (accessToken, res, text,voice) => {
@@ -324,3 +324,4 @@ exports.listOfVoices = listOfVoices;
 exports.textToSpeechForIdentification = textToSpeechForIdentification;
 exports.textToSpeech = textToSpeech;
 exports.findVoice = findVoice;
+exports.voiceModel = Voice;
