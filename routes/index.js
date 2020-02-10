@@ -1121,6 +1121,7 @@ router.post('/contacts/delete/:number',(req,res)=>{
 });
 
 
+
 router.get('/contacts',(req,res)=>{
 
     contactsService.getAllContacts(res);
