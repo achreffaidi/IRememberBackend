@@ -166,6 +166,7 @@ const getChosenCategories = (res) => {
                 chosenCategoriesList: data
             });
         }
+
     ).catch(
         err => {
             console.error(err);
