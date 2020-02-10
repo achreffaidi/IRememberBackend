@@ -14,6 +14,7 @@ var Jimp = require('jimp');
 const scoreService = require('./score');
 const photosgameService = require('./photosgame');
 const stateService=require('./phoneState');
+const emergencyService =require('./emergencyNumber');
 
 
 
@@ -1003,4 +1004,11 @@ router.get('/setPosition',(req,res)=>{
     locationService.setPosition(req,res);
 });
 
+router.get('/getEmergencyNumber',(req,res)=>{
+    emergencyService.getEmergencyNumber(res);
+});
+
+router.post('/setEmergencyNumber',(req,res)=>{
+    emergencyService.setEmergencyNumber(req,res);
+});
 module.exports = router;
