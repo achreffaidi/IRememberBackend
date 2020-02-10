@@ -1073,8 +1073,8 @@ router.post('/contacts',(req,res)=>{
             const extentionTab = file.type.split('/');
             const extention = extentionTab[1];
             //  file.path = __dirname + '\\..\\memories\\' + 'memory' + index + '.png';//+ extention;
-            file.path = 'D:/home/site/wwwroot/contacts/'+'contact' + index + '.png';//+ extention;
-          //  file.path = './contacts/'+'memory' + index + '.png';//+ extention;
+          //  file.path = 'D:/home/site/wwwroot/contacts/'+'contact' + index + '.png';//+ extention;
+            file.path = './contacts/'+'contact' + index + '.png';//+ extention;
             file.type = 'image/png';
             file.name = index + '.png';
             filePath = file.path;
@@ -1090,8 +1090,8 @@ router.post('/contacts',(req,res)=>{
                 description: description,
                 number: number,
                 name: name,
-                pictureId: 'p'+index,
-                pictureUrl: 'https://i-remember2.azurewebsites.net/contactsImage/'+fileName
+                imageId: 'p'+index,
+                imageURL: 'https://i-remember2.azurewebsites.net/contactsImage/'+fileName
             };
             console.log(contact);
             contactsService.addContact(contact);
@@ -1111,6 +1111,20 @@ router.post('/contacts',(req,res)=>{
 });
 
 
+router.post('/contacts/delete/:number',(req,res)=>{
 
+    const { number } = req.params;
+
+    contactsService.deleteContact(number, res);
+
+
+});
+
+
+router.get('/contacts',(req,res)=>{
+
+    contactsService.getAllContacts(res);
+
+});
 
 module.exports = router;

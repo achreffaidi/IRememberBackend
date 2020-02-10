@@ -16,7 +16,10 @@ const contactsSchema = new mongoose.Schema({
     number: {
         type: Number
     },
-    image: {
+    imageURL: {
+        type: String
+    },
+    imageId: {
         type: String
     }
 });
@@ -35,7 +38,7 @@ const addContact = (contactObject) => {
 const deleteContact = (id, res) => {
 
 
-    const promise =  contactsModel.deleteOne({pictureId: id},{}, err => {
+    const promise =  contactsModel.deleteOne({number: id},{}, err => {
         if (err){
             res.statusCode = 400;
             res.send();
@@ -49,5 +52,25 @@ const deleteContact = (id, res) => {
 
 };
 
+
+const getAllContacts = (res) => {
+
+   const promise = contactsModel.find().exec();
+   promise.then( data => {
+
+       res.statusCode = 200;
+       res.json( { contactsList: data } );
+
+   } ).catch( err => {
+
+       res.statusCode = 400;
+       res.send();
+
+   } )
+
+} ;
+
 exports.addContact = addContact;
+exports.deleteContact =deleteContact;
+exports.getAllContacts = getAllContacts;
 
