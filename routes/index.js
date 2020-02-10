@@ -964,6 +964,13 @@ router.post('/photosGame/setCategoriesToChosen',(req,res)=>{
 
 });
 
+router.get('/photosGame/chosenCategories',(req,res)=>{
+
+
+    photosgameService.getChosenCategories(res);
+
+});
+
 router.get('/getVoiceChoice',(req,res)=>{
     speech.getVoice(res);
 });

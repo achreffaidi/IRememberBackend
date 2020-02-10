@@ -153,7 +153,32 @@ const setCategoriesToChosen = async (categories,res) => {
 
 };
 
+const getChosenCategories = (res) => {
+
+    const query = photosgameModel.find( { chosen: 'true' } );
+    const promise = query.exec();
+
+    promise.then(
+        data => {
+            console.log(data);
+            res.statusCode = 200;
+            res.json({
+                chosenCategoriesList: data
+            });
+        }
+    ).catch(
+        err => {
+            console.error(err);
+            res.statusCode = 400;
+            res.json({
+                error: 'can\'t load categories'
+            });
+        }
+    )
+}
+
 
 exports.imageLinks = imageLinks;
 exports.getAllCategories = getAllCategories;
 exports.setCategoriesToChosen= setCategoriesToChosen;
+exports.getChosenCategories = getChosenCategories;

@@ -174,7 +174,7 @@ const getAllMongoose = async (res) => {
     const p = query.exec();
     p.then(  data => {
      //   console.log(data);
-        length=data.length;
+     // length=data.length;
         data.forEach( async task => {
         let  {day,time,title,done,image,description,priority,voiceLink,name,voice} = task;
         let obj = {
@@ -201,13 +201,6 @@ const getAllMongoose = async (res) => {
                 await createVoice(title+ ' . ' + description, voiceChoice[0], name );
 
             }
-
-
-
-
-
-
-
 
 
         allTasks.push(obj);
@@ -283,3 +276,4 @@ exports.setDone=setDoneMongoose;
 exports.setUndone=setUndoneMongoose;
 exports.getByDay=getTasksByDayMongoose;
 exports.deleteTask=deleteTaskMongoose;
+exports.tasksModel=tasksModel;
