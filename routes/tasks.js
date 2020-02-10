@@ -239,15 +239,9 @@ const getTasksByDayMongoose = async (day,res) => {
         console.log(data);
 
         data.forEach(task => {
-            let {id,title,time,done,day} = task;
-            let obj = {
-                title: title,
-                id: id,
-                time: time,
-                done: done,
-                day: day
-            };
-            tasksByDay.push(obj);
+
+
+            tasksByDay.push(task);
         });
 
         res.statusCode=200;

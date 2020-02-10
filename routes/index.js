@@ -15,6 +15,7 @@ const scoreService = require('./score');
 const photosgameService = require('./photosgame');
 const stateService=require('./phoneState');
 const emergencyService =require('./emergencyNumber');
+const contactsService = require('./contacts');
 
 
 
@@ -1012,4 +1013,104 @@ router.get('/getEmergencyNumber',(req,res)=>{
 router.post('/setEmergencyNumber',(req,res)=>{
     emergencyService.setEmergencyNumber(req,res);
 });
+
+
+
+
+
+
+
+router.get('/contactsImage/:fileName',  (req,res) => {
+
+    const {fileName} = req.params;
+
+    if(!fileName){
+        res.statusCode = 404;
+        res.send('');
+        return 0;
+    }
+
+    const uploadsDir = path.join('D:/home/site/wwwroot/contacts');
+   // const uploadsDir = path.join('./contacts');
+    // const uploadsDir = path.join('../memories');
+    console.log(uploadsDir);
+    fs.readdir(uploadsDir, (err, files) => {
+        if(err) {
+            return res.send('No files found');
+        }
+        let name = false;
+
+        files.forEach( (file, key) => {
+            if ( file === fileName  ) name = file;
+        });
+
+        if( !name )
+            res.send('File not found');
+        else
+            res.sendFile(name, { root: uploadsDir }, (err) => {
+                if (err) throw err;
+            } )
+
+
+    })
+});
+
+
+
+router.post('/contacts',(req,res)=>{
+
+    try {
+
+        var { name, description, number } = req.headers;
+        console.log(req.body);
+        var filePath;
+        var fileName;
+        var form = new formidable.IncomingForm();
+        form.uploadDir = './uploads';
+        form.keepExtensions = true;
+        form.type = true;
+        form.on('fileBegin', function (name, file) {
+            const extentionTab = file.type.split('/');
+            const extention = extentionTab[1];
+            //  file.path = __dirname + '\\..\\memories\\' + 'memory' + index + '.png';//+ extention;
+            file.path = 'D:/home/site/wwwroot/contacts/'+'contact' + index + '.png';//+ extention;
+          //  file.path = './contacts/'+'memory' + index + '.png';//+ extention;
+            file.type = 'image/png';
+            file.name = index + '.png';
+            filePath = file.path;
+            fileName = 'contact'+ file.name;
+            console.log(file);
+            index = uuid();
+        });
+        form.parse(req, (err, fields, files) => {
+
+            if (err) throw err;
+
+            const contact = {
+                description: description,
+                number: number,
+                name: name,
+                pictureId: 'p'+index,
+                pictureUrl: 'https://i-remember2.azurewebsites.net/contactsImage/'+fileName
+            };
+            console.log(contact);
+            contactsService.addContact(contact);
+            index = uuid();
+            res.statusCode=200;
+            res.send();
+        });
+
+
+
+
+    }catch (e) {
+        console.log(e.message);
+        res.statusCode=400;
+        res.send();
+    }
+});
+
+
+
+
 module.exports = router;
