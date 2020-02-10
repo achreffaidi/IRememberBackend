@@ -1004,6 +1004,7 @@ router.get('/setPosition',(req,res)=>{
     locationService.setPosition(req,res);
 });
 
+
 router.get('/getEmergencyNumber',(req,res)=>{
     emergencyService.getEmergencyNumber(res);
 });
