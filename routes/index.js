@@ -521,21 +521,89 @@ router.get('/setDone/:id', function(req, res, next) {
 
 router.post('/addTask', function(req, res, next) {
 
-    // console.log(req.body);
+
+
+
+
+
     try {
-        const {task} = req.body;
 
-        if (!task) throw new Error('task is not valid');
+        var {name, description, number, withImage} = req.headers;
 
-        tasksService.addTask(task);
-        res.json({});
+        var task = {
+            name: name,
+            description: description,
+            number: number
+        };
 
-    }catch (e) {
-        console.log(`Error ${e.message}`);
-        res.statusCode = 400;
-        res.setHeader('error',e.message);
-        res.send();
+        if (withImage === 'true') {
+            try {
+
+                tasksService.addTask(task);
+                res.statusCode = 200;
+                res.send();
+
+            } catch (e) {
+                console.log(`Error ${e.message}`);
+                res.statusCode = 400;
+                res.setHeader('error', e.message);
+                res.send();
+            }
+        } else {
+
+
+            var filePath;
+            var fileName;
+            var form = new formidable.IncomingForm();
+            form.uploadDir = './uploads';
+            form.keepExtensions = true;
+            form.type = true;
+            form.on('fileBegin', function (name, file) {
+                const extentionTab = file.type.split('/');
+                const extention = extentionTab[1];
+                //  file.path = __dirname + '\\..\\memories\\' + 'memory' + index + '.png';//+ extention;
+                file.path = 'D:/home/site/wwwroot/tasks/' + 'task' + index + '.png';//+ extention;
+                // file.path = './contacts/'+'contact' + index + '.png';//+ extention;
+                file.type = 'image/png';
+                file.name = index + '.png';
+                filePath = file.path;
+                fileName = 'task' + file.name;
+                console.log(file);
+                index = uuid();
+            });
+            form.parse(req, (err, fields, files) => {
+
+                if (err) throw err;
+
+
+
+                task.imageURL = 'https://i-remember2.azurewebsites.net/tasksImage/' + fileName;
+                task.imageId = 't'+index;
+
+                console.log(task);
+                contactsService.addContact(task);
+                index = uuid();
+                res.statusCode = 200;
+                res.send();
+            });
+
+
+        }
     }
+    catch
+        (e)
+        {
+            console.log(e.message);
+            res.statusCode = 400;
+            res.send();
+        }
+
+
+
+
+
+    // console.log(req.body);
+
 });
 
 
@@ -1055,6 +1123,41 @@ router.get('/contactsImage/:fileName',  (req,res) => {
     })
 });
 
+
+router.get('/tasksImage/:fileName',  (req,res) => {
+
+    const {fileName} = req.params;
+
+    if(!fileName){
+        res.statusCode = 404;
+        res.send('');
+        return 0;
+    }
+
+    const uploadsDir = path.join('D:/home/site/wwwroot/tasks');
+    // const uploadsDir = path.join('./contacts');
+    // const uploadsDir = path.join('../memories');
+    console.log(uploadsDir);
+    fs.readdir(uploadsDir, (err, files) => {
+        if(err) {
+            return res.send('No files found');
+        }
+        let name = false;
+
+        files.forEach( (file, key) => {
+            if ( file === fileName  ) name = file;
+        });
+
+        if( !name )
+            res.send('File not found');
+        else
+            res.sendFile(name, { root: uploadsDir }, (err) => {
+                if (err) throw err;
+            } )
+
+
+    })
+});
 
 
 router.post('/contacts',(req,res)=>{
