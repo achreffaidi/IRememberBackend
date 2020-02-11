@@ -991,9 +991,9 @@ router.post('/setScore', function(req, res, next) {
 
 
     console.log(req.body);
-    var {points, date} = req.body;
+    var {correct, date, questionsNumber} = req.body;
 
-        scoreService.addScore(points,date,res);
+        scoreService.addScore(questionsNumber,correct,date,res);
 
 
 });

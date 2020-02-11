@@ -13,25 +13,33 @@ const scoreSchema = new mongoose.Schema({
         type: String,
         unique: true
     },
-    points: {
+    rapport: {
         type: Number
     },
     date: {
         type: String
+    },
+    questionsNumber:{
+        type: Number
+    },
+    correct:{
+        type: Number
     }
 });
 
 const scoreModel = mongoose.model('scores', scoreSchema);
 
-const addScore = (points,date,res) => {
+const addScore = (questionsNumber, correct,date,res) => {
 
     const score = new scoreModel({
         scoreId: index,
-        points: points,
-        date: date
+        questionsNumber: questionsNumber,
+        date: date,
+        correct: correct,
+        rapport:   correct / questionsNumber
     });
 
-    console.log(score);
+  //  console.log(score);
     index = uuid();
     score.save(err => {
         if (err){
