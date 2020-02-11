@@ -157,6 +157,7 @@ const addMongoose = async (taskObject) => {
 
     const t = new tasksModel(taskObject);
 
+    console.log('final object');
     console.log(t);
     t.save( err => {
         console.error(err);
@@ -261,7 +262,29 @@ const deleteTaskMongoose = async (id,taskObject) => {
     const promise =  tasksModel.deleteOne({id: id},taskObject, err => {
         if (err) throw new Error();
     });
-}
+};
+
+
+const getTaskStatByDay = (res,day) => {
+
+
+  const allByDay = tasksModel.find( { day: day } ).exec();
+  allByDay.then( all => {
+
+      console.log(all);
+      const doneByDay = all.filter( task => task.done === 'true' || task.done === true );
+
+      res.json( {
+          tasksStat: {
+              all: all.length,
+              done: doneByDay.length
+          }
+      } );
+
+  } ).catch( err => console.log(err) );
+
+
+};
 
 exports.addTask = addMongoose;
 //exports.addTask = main;
@@ -271,3 +294,4 @@ exports.setUndone=setUndoneMongoose;
 exports.getByDay=getTasksByDayMongoose;
 exports.deleteTask=deleteTaskMongoose;
 exports.tasksModel=tasksModel;
+exports.getTaskStatByDay = getTaskStatByDay;

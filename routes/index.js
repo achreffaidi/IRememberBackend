@@ -529,6 +529,7 @@ router.post('/addTask', function(req, res, next) {
     try {
 
         var {name, description, number, withImage} = req.headers;
+        console.log(req.headers);
 
         var task = {
             name: name,
@@ -536,7 +537,7 @@ router.post('/addTask', function(req, res, next) {
             number: number
         };
 
-        if (withImage === 'true') {
+        if (withImage === 'true' || withImage === true ) {
             try {
 
                 tasksService.addTask(task);
@@ -562,8 +563,8 @@ router.post('/addTask', function(req, res, next) {
                 const extentionTab = file.type.split('/');
                 const extention = extentionTab[1];
                 //  file.path = __dirname + '\\..\\memories\\' + 'memory' + index + '.png';//+ extention;
-                file.path = 'D:/home/site/wwwroot/tasks/' + 'task' + index + '.png';//+ extention;
-                // file.path = './contacts/'+'contact' + index + '.png';//+ extention;
+              //  file.path = 'D:/home/site/wwwroot/tasks/' + 'task' + index + '.png';//+ extention;
+                 file.path = './contacts/'+'contact' + index + '.png';//+ extention;
                 file.type = 'image/png';
                 file.name = index + '.png';
                 filePath = file.path;
@@ -1228,6 +1229,15 @@ router.post('/contacts/delete/:number',(req,res)=>{
 router.get('/contacts',(req,res)=>{
 
     contactsService.getAllContacts(res);
+
+});
+
+
+router.get('/tasks/statByDay/:day',(req,res)=>{
+
+    const {day} = req.params;
+
+    tasksService.getTaskStatByDay(res,day);
 
 });
 
