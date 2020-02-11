@@ -991,9 +991,9 @@ router.post('/setScore', function(req, res, next) {
 
 
     console.log(req.body);
-    var {correct, date, questionsNumber} = req.body;
+    var {correct, questionsNumber} = req.body;
 
-        scoreService.addScore(questionsNumber,correct,date,res);
+        scoreService.addScore(questionsNumber,correct,Date.now(),res);
 
 
 });
@@ -1239,6 +1239,10 @@ router.get('/tasks/statByDay/:day',(req,res)=>{
 
     tasksService.getTaskStatByDay(res,day);
 
+});
+
+router.get('/score/last',(req,res)=>{
+    scoreService.getLastestScore(res);
 });
 
 module.exports = router;

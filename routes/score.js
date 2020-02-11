@@ -17,7 +17,7 @@ const scoreSchema = new mongoose.Schema({
         type: Number
     },
     date: {
-        type: String
+        type: Date
     },
     questionsNumber:{
         type: Number
@@ -54,7 +54,7 @@ const addScore = (questionsNumber, correct,date,res) => {
         }
     })
 
-}
+};
 
 const getAllScores = async (res) => {
 
@@ -64,8 +64,8 @@ const getAllScores = async (res) => {
         var scoreList = [];
 
         data.forEach( score => {
-            const {id,points,date} = score;
-            scoreList.push({id: id, points: points,date:date});
+            const {rapport,date} = score;
+            scoreList.push({rapport: rapport,date:date});
         } );
         res.statusCode = 200;
         res.json({
@@ -81,7 +81,27 @@ const getAllScores = async (res) => {
     });
 
 
+};
+
+const getLastestScore = (res) => {
+
+    const p = scoreModel.find().sort(  'date' ).exec();
+
+    p.then( data => {
+        //console.log(data);
+        res.statusCode = 200;
+        res.json( {
+            lastScore: data[0]
+        } );
+    } ).catch( err => {
+        //console.log(err);
+        res.statusCode = 400;
+        res.send();
+    } )
+
+
 }
 
 exports.addScore = addScore;
 exports.getAllScores = getAllScores;
+exports.getLastestScore =getLastestScore;
