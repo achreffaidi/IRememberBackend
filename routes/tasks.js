@@ -36,9 +36,12 @@ const taskSchema = new mongoose.Schema({
     title: {
         type: String
     },
-    image: {
+    imageURL: {
         type: String,
         default: null
+    },
+    imageId: {
+        type: String
     },
     priority: {
         type: Number

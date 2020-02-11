@@ -528,8 +528,9 @@ router.post('/addTask', function(req, res, next) {
 
     try {
 
-        var {name, description, number, withImage} = req.headers;
+        var {name, description, number, withimage} = req.headers;
         console.log(req.headers);
+        console.log(withimage);
 
         var task = {
             name: name,
@@ -537,7 +538,7 @@ router.post('/addTask', function(req, res, next) {
             number: number
         };
 
-        if (withImage === 'true' || withImage === true ) {
+        if (withimage === 'false' || withimage === false ) {
             try {
 
                 tasksService.addTask(task);
@@ -563,8 +564,8 @@ router.post('/addTask', function(req, res, next) {
                 const extentionTab = file.type.split('/');
                 const extention = extentionTab[1];
                 //  file.path = __dirname + '\\..\\memories\\' + 'memory' + index + '.png';//+ extention;
-              //  file.path = 'D:/home/site/wwwroot/tasks/' + 'task' + index + '.png';//+ extention;
-                 file.path = './contacts/'+'contact' + index + '.png';//+ extention;
+                file.path = 'D:/home/site/wwwroot/tasks/' + 'task' + index + '.png';//+ extention;
+             //    file.path = './tasks/'+'task' + index + '.png';//+ extention;
                 file.type = 'image/png';
                 file.name = index + '.png';
                 filePath = file.path;
@@ -579,10 +580,11 @@ router.post('/addTask', function(req, res, next) {
 
 
                 task.imageURL = 'https://i-remember2.azurewebsites.net/tasksImage/' + fileName;
+              //  task.imageURL = 'http://localhost:3000/tasksImage/' + fileName;
                 task.imageId = 't'+index;
 
-                console.log(task);
-                contactsService.addContact(task);
+               // console.log(task);
+               tasksService.addTask(task);
                 index = uuid();
                 res.statusCode = 200;
                 res.send();
@@ -1136,6 +1138,7 @@ router.get('/tasksImage/:fileName',  (req,res) => {
     }
 
     const uploadsDir = path.join('D:/home/site/wwwroot/tasks');
+   // const uploadsDir = path.join('./tasks');
     // const uploadsDir = path.join('./contacts');
     // const uploadsDir = path.join('../memories');
     console.log(uploadsDir);
