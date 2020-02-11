@@ -521,11 +521,6 @@ router.get('/setDone/:id', function(req, res, next) {
 
 router.post('/addTask', function(req, res, next) {
 
-
-
-
-
-
     try {
 
         var {title, description, withimage, time} = req.headers;
@@ -600,12 +595,6 @@ router.post('/addTask', function(req, res, next) {
             res.statusCode = 400;
             res.send();
         }
-
-
-
-
-
-    // console.log(req.body);
 
 });
 

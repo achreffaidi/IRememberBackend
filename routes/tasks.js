@@ -182,7 +182,6 @@ const getAllMongoose = async (res) => {
 
         data.forEach(task => {
 
-
             tasksByDay.push(task);
         });
 

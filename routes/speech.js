@@ -8,6 +8,8 @@ const readline = require('readline-sync');
 // Requires xmlbuilder to build the SSML body
 const xmlbuilder = require('xmlbuilder');
 
+const tasksModel = require('./tasks');
+
 var uuid = require('uuid');
 const reque= require('request');
 var mongoose =require('mongoose');
@@ -273,8 +275,117 @@ const getVoice =  (res)=>{
     })
 };
 
+
+
+
+
+function getAccessToken(subscriptionKey) {
+    let options = {
+        method: 'POST',
+        uri: 'https://westeurope.api.cognitive.microsoft.com/sts/v1.0/issueToken',
+        headers: {
+            'Ocp-Apim-Subscription-Key': subscriptionKey
+        }
+    }
+    return rp(options);
+};
+
+function textToSpeech(accessToken, text, voice, name) {
+
+    // console.log(voice);
+    // Create the SSML request.
+    let xml_body = xmlbuilder.create('speak')
+        .att('version', '1.0')
+        .att('xml:lang', voice.Locale)
+        .ele('voice')
+        .att('xml:lang', voice.Locale)
+        .att('name', voice.Name)
+        .txt(text)
+        .end();
+    // Convert the XML into a string to send in the TTS request.
+    let body = xml_body.toString();
+
+    let options = {
+        method: 'POST',
+        baseUrl: 'https://westeurope.tts.speech.microsoft.com/',
+        url: 'cognitiveservices/v1',
+        headers: {
+            'Authorization': 'Bearer ' + accessToken,
+            'cache-control': 'no-cache',
+            'User-Agent': 'YOUR_RESOURCE_NAME',
+            'X-Microsoft-OutputFormat': 'riff-24khz-16bit-mono-pcm',
+            'Content-Type': 'application/ssml+xml'
+        },
+        body: body
+    }
+
+
+    let request = rp(options)
+        .on('response', (response) => {
+            if (response.statusCode === 200) {
+                request.pipe(fs.createWriteStream('D:/home/site/wwwroot/speech/'+name));
+                //  request.pipe(fs.createWriteStream(index+'.mp3'));
+
+                console.log('\nYour file is ready.\n')
+            }
+        });
+    return request;
+}
+
+const  createVoice= async (text, voiceName, name) => {
+    //  console.log(voiceName)
+    // Reads subscription key from env variable.
+    // You can replace this with a string containing your subscription key. If
+    // you prefer not to read from an env variable.
+    // e.g. const subscriptionKey = "your_key_here";
+    const subscriptionKey = process.env.SPEECH_API_KEY;
+    if (!subscriptionKey) {
+        throw new Error('Environment variable for your subscription key is not set.')
+    };
+    // Prompts the user to input text.
+
+    //  console.log(text);
+
+    try {
+        const accessToken = await getAccessToken(subscriptionKey);
+        await textToSpeech(accessToken, text,voiceName, name);
+    } catch (err) {
+        console.log(`Something went wrong: ${err}`);
+    }
+};
+
+
+
+
+
+const updateTaskvoices = () => {
+
+    const tasks = tasksModel.find().exec();
+
+    tasks.then( data => {
+
+        data.forEach( el => {
+
+            const { name } = el;
+
+            const voicePromise = Voice.find().exec();
+
+            voicePromise.then(async voice => {
+
+                await createVoice( el.title + ' . ' + el.description, voice, name );
+
+            } ).catch( err => console.log(err) );
+
+        } );
+
+    } ).catch( err => {} );
+
+
+
+}
+
 const setVoice= (shortname,res)=>{
-    var voiceSpeech;
+
     const options = {
         uri: 'https://westeurope.api.cognitive.microsoft.com/sts/v1.0/issueToken',
         headers: {
@@ -314,6 +425,8 @@ const setVoice= (shortname,res)=>{
 
         })
     })
+
+    updateTaskvoices();
 
 };
 
