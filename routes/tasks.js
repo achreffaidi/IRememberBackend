@@ -170,60 +170,37 @@ const addMongoose = async (taskObject) => {
 };
 
 const getAllMongoose = async (res) => {
-    var allTasks = [];
+    var tasksByDay = [];
+
     const query = tasksModel.find();
     const p = query.exec();
-    p.then(  data => {
-     //   console.log(data);
-     // length=data.length;
-        data.forEach( async task => {
-        let  {day,time,title,done,image,description,priority,voiceLink,name,voice} = task;
-        let obj = {
-            day: day,
-            time: time,
-            title:title,
-            done: done,
-            description: description,
-            priority: priority,
-            voiceLink: voiceLink
-        };
-        if (image != null){
-            obj.image = image;
-        }
+    p.then(data => {
+        console.log(data);
+
+        data.forEach(task => {
 
 
-            let voiceChoice = await  voiceModel.find();
-            let   voiceChoiceShortName = voiceChoice[0].ShortName;
-
-            if(voiceChoiceShortName === voice){
-
-            } else {
-
-                await createVoice(title+ ' . ' + description, voiceChoice[0], name );
-
-            }
-
-
-        allTasks.push(obj);
+            tasksByDay.push(task);
         });
+
         res.statusCode=200;
         res.json({
-            list: allTasks
+            listByDay:  tasksByDay
         });
         return 0;
-    } ).catch( err => {
+    }).catch(err => {
+        res.statusCode=404;
         console.log(err);
-        res.statusCode=400;
-        res.json({});
+        res.send();
         return 0;
-    } );
+    })
 
 };
 
 const setDoneMongoose = async (id) => {
     const doc = await tasksModel.findOneAndUpdate({id: id},{done: true});
     console.log(doc);
-}
+};
 
 const setUndoneMongoose = async (id) => {
     const doc = await tasksModel.findOneAndUpdate({id: id},{done: false});
