@@ -528,14 +528,14 @@ router.post('/addTask', function(req, res, next) {
 
     try {
 
-        var {name, description, number, withimage} = req.headers;
+        var {title, description, withimage, time} = req.headers;
         console.log(req.headers);
         console.log(withimage);
 
         var task = {
-            name: name,
+            title: title,
             description: description,
-            number: number
+            time: time
         };
 
         if (withimage === 'false' || withimage === false ) {
