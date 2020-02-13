@@ -57,6 +57,9 @@ const taskSchema = new mongoose.Schema({
     },
     name: {
         type:String
+    },
+    category: {
+        type: String
     }
 });
 
@@ -178,7 +181,7 @@ const getAllMongoose = async (res) => {
     const query = tasksModel.find();
     const p = query.exec();
     p.then(data => {
-        console.log(data);
+      //  console.log(data);
 
         data.forEach(task => {
 
@@ -207,7 +210,7 @@ const setDoneMongoose = async (id) => {
 const setUndoneMongoose = async (id) => {
     const doc = await tasksModel.findOneAndUpdate({id: id},{done: false});
     console.log(doc);
-}
+};
 
 const getTasksByDayMongoose = async (day,res) => {
 
