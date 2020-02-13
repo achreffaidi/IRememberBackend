@@ -425,7 +425,7 @@ const setVoice= (shortname,res)=>{
 
 
         })
-    })
+    });
 
     updateTaskvoices();
 

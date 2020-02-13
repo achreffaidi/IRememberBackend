@@ -1,7 +1,8 @@
 
 var mongoose =require('mongoose');
 
-const {voiceModel} = require('./speech');
+
+const voicesService = require('./speech');
 const xmlbuilder = require('xmlbuilder');
 var uuid = require('uuid');
 var index = uuid();
@@ -65,7 +66,7 @@ const taskSchema = new mongoose.Schema({
 
 const tasksModel = mongoose.model('tasksVoice', taskSchema);
 
-
+const voiceModel = voicesService.voiceModel;
 
 
 
@@ -149,7 +150,10 @@ const  createVoice= async (text, voiceName, name) => {
 
 const addMongoose = async (taskObject) => {
 
-    const voice = await  voiceModel.find();
+
+
+
+    const voice = await  voicesService.voiceModel.find();
     taskObject.voice = voice[0].ShortName;
     //console.log(voice);
 

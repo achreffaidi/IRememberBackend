@@ -524,7 +524,7 @@ router.post('/addTask', function(req, res, next) {
     try {
 
         var {title, description, withimage, time, category, day} = req.headers;
-        console.log(req.headers);
+      //  console.log(req.headers);
         console.log(withimage);
 
         var task = {
