@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="83cf076e-4dd3-4aec-832d-9bfc08b799a2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/speech.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/speech.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/tasks.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/tasks.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -92,25 +93,27 @@
     <session id="-1084984246">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="2" />
+          <entry key="project.closed" value="4" />
           <entry key="project.open.time.1" value="1" />
+          <entry key="project.open.time.5" value="1" />
+          <entry key="project.open.time.64" value="1" />
           <entry key="project.open.time.65" value="1" />
           <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="3" />
+          <entry key="project.opened" value="5" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="env" value="64" />
-          <entry key="js" value="5183" />
-          <entry key="txt" value="358" />
+          <entry key="js" value="5970" />
+          <entry key="txt" value="405" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key=".env file" value="64" />
-          <entry key="JavaScript" value="5183" />
-          <entry key="PLAIN_TEXT" value="358" />
+          <entry key="JavaScript" value="5970" />
+          <entry key="PLAIN_TEXT" value="405" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -171,15 +174,15 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/routes/tasks.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-528">
-              <caret line="112" column="15" lean-forward="true" selection-start-line="112" selection-start-column="15" selection-end-line="112" selection-end-column="15" />
+            <state relative-caret-position="340">
+              <caret line="267" column="34" lean-forward="true" selection-start-line="267" selection-start-column="34" selection-end-line="267" selection-end-column="34" />
               <folding>
                 <element signature="e#231#288#0" />
                 <element signature="n#!!block;n#getAccessToken#0" />
-                <element signature="e#6392#6684#0" />
+                <element signature="n#!!block;n#textToSpeech#0" />
               </folding>
             </state>
           </provider>
@@ -188,7 +191,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/score.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
+            <state relative-caret-position="952">
               <caret line="56" column="2" selection-start-line="56" selection-start-column="2" selection-end-line="56" selection-end-column="2" />
             </state>
           </provider>
@@ -211,15 +214,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/speech.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1275">
-              <caret line="303" column="90" selection-start-line="303" selection-start-column="90" selection-end-line="303" selection-end-column="90" />
+            <state relative-caret-position="137">
+              <caret line="340" column="8" lean-forward="true" selection-start-line="340" selection-start-column="8" selection-end-line="340" selection-end-column="8" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
-                <element signature="e#1219#3504#0" />
-                <element signature="e#3564#5849#0" />
-                <element signature="e#5885#7364#0" />
-                <element signature="e#7407#8671#0" />
-                <element signature="e#8698#8902#0" />
+                <element signature="n#!!block;n#getAccessToken#0" />
               </folding>
             </state>
           </provider>
@@ -246,11 +245,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="537" column="22" selection-start-line="537" selection-start-column="22" selection-end-line="537" selection-end-column="22" />
+            <state relative-caret-position="35">
+              <caret line="485" column="12" selection-start-line="485" selection-start-column="12" selection-end-line="485" selection-end-column="26" />
             </state>
           </provider>
         </entry>
@@ -283,8 +282,11 @@
       <find>game</find>
       <find>score</find>
       <find>Image</find>
-      <find>getAll</find>
       <find>tasksImage</find>
+      <find>addTask</find>
+      <find>textToSpeech</find>
+      <find>by</find>
+      <find>getAll</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -297,14 +299,14 @@
         <option value="$PROJECT_DIR$/routes/memories.js" />
         <option value="$PROJECT_DIR$/routes/photosgame.js" />
         <option value="$PROJECT_DIR$/routes/voice.js" />
-        <option value="$PROJECT_DIR$/routes/speech.js" />
         <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/routes/phoneState.js" />
         <option value="$PROJECT_DIR$/routes/contacts.js" />
         <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/routes/score.js" />
-        <option value="$PROJECT_DIR$/routes/tasks.js" />
         <option value="$PROJECT_DIR$/routes/index.js" />
+        <option value="$PROJECT_DIR$/routes/speech.js" />
+        <option value="$PROJECT_DIR$/routes/tasks.js" />
       </list>
     </option>
   </component>
@@ -335,6 +337,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -345,23 +348,12 @@
             <path>
               <item name="IRememberBackend" type="b2602c69:ProjectViewProjectNode" />
               <item name="IRememberBackend" type="462c0819:PsiDirectoryNode" />
-              <item name="contacts" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="IRememberBackend" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IRememberBackend" type="462c0819:PsiDirectoryNode" />
               <item name="routes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="IRememberBackend" type="b2602c69:ProjectViewProjectNode" />
-              <item name="IRememberBackend" type="462c0819:PsiDirectoryNode" />
-              <item name="tasks" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -412,7 +404,9 @@
       <workItem from="1580806972491" duration="1098000" />
       <workItem from="1581008431161" duration="1060000" />
       <workItem from="1581415727571" duration="764000" />
-      <workItem from="1581438451335" duration="9907000" />
+      <workItem from="1581438451335" duration="12407000" />
+      <workItem from="1581522746143" duration="102000" />
+      <workItem from="1581589712703" duration="2252000" />
     </task>
     <task id="LOCAL-00001" summary="change task structure, add priority and voice link">
       <created>1581253735688</created>
@@ -505,17 +499,30 @@
       <option name="project" value="LOCAL" />
       <updated>1581453368084</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="fix image in tasks">
+      <created>1581454415662</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1581454415662</updated>
+    </task>
+    <task id="LOCAL-00015" summary="update tasks voices when updating voice choice">
+      <created>1581456671368</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1581456671368</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="122968000" />
+    <option name="totallyTimeSpent" value="127822000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12623926" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.035029743" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -529,7 +536,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32907802" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.40591398" side_tool="true" weight="0.31133428" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.59408605" visible="true" weight="0.30780143" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.59408605" visible="true" weight="0.30496454" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -577,7 +584,8 @@
     <MESSAGE value="add get last score and change score structure" />
     <MESSAGE value="fix get All tasks" />
     <MESSAGE value="fix image in tasks" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix image in tasks" />
+    <MESSAGE value="update tasks voices when updating voice choice" />
+    <option name="LAST_COMMIT_MESSAGE" value="update tasks voices when updating voice choice" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/node_modules/express/lib/router/route.js">
@@ -628,6 +636,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.env">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="47" lean-forward="true" selection-start-line="6" selection-start-column="47" selection-end-line="6" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/score.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="952">
+          <caret line="56" column="2" selection-start-line="56" selection-start-column="2" selection-end-line="56" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/routes/photosgame.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
@@ -636,21 +658,6 @@
             <element signature="e#647#1864#0" />
             <element signature="e#2411#2485#0" />
             <element signature="e#2544#3409#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/speech.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1275">
-          <caret line="303" column="90" selection-start-line="303" selection-start-column="90" selection-end-line="303" selection-end-column="90" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#1219#3504#0" />
-            <element signature="e#3564#5849#0" />
-            <element signature="e#5885#7364#0" />
-            <element signature="e#7407#8671#0" />
-            <element signature="e#8698#8902#0" />
           </folding>
         </state>
       </provider>
@@ -665,13 +672,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.env">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="47" lean-forward="true" selection-start-line="6" selection-start-column="47" selection-end-line="6" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/routes/contacts.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
@@ -679,29 +679,33 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/score.js">
+    <entry file="file://$PROJECT_DIR$/routes/speech.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="56" column="2" selection-start-line="56" selection-start-column="2" selection-end-line="56" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/tasks.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-528">
-          <caret line="112" column="15" lean-forward="true" selection-start-line="112" selection-start-column="15" selection-end-line="112" selection-end-column="15" />
+        <state relative-caret-position="137">
+          <caret line="340" column="8" lean-forward="true" selection-start-line="340" selection-start-column="8" selection-end-line="340" selection-end-column="8" />
           <folding>
-            <element signature="e#231#288#0" />
+            <element signature="n#!!doc" expanded="true" />
             <element signature="n#!!block;n#getAccessToken#0" />
-            <element signature="e#6392#6684#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="537" column="22" selection-start-line="537" selection-start-column="22" selection-end-line="537" selection-end-column="22" />
+        <state relative-caret-position="35">
+          <caret line="485" column="12" selection-start-line="485" selection-start-column="12" selection-end-line="485" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/tasks.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="267" column="34" lean-forward="true" selection-start-line="267" selection-start-column="34" selection-end-line="267" selection-end-column="34" />
+          <folding>
+            <element signature="e#231#288#0" />
+            <element signature="n#!!block;n#getAccessToken#0" />
+            <element signature="n#!!block;n#textToSpeech#0" />
+          </folding>
         </state>
       </provider>
     </entry>

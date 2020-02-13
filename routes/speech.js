@@ -290,7 +290,7 @@ function getAccessToken(subscriptionKey) {
     return rp(options);
 };
 
-function textToSpeech(accessToken, text, voice, name) {
+function textToSpeechWithName(accessToken, text, voice, name) {
 
     // console.log(voice);
     // Create the SSML request.
@@ -338,6 +338,7 @@ const  createVoice= async (text, voiceName, name) => {
     // You can replace this with a string containing your subscription key. If
     // you prefer not to read from an env variable.
     // e.g. const subscriptionKey = "your_key_here";
+    try{
     const subscriptionKey = process.env.SPEECH_API_KEY;
     if (!subscriptionKey) {
         throw new Error('Environment variable for your subscription key is not set.')
@@ -346,9 +347,9 @@ const  createVoice= async (text, voiceName, name) => {
 
     //  console.log(text);
 
-    try {
+
         const accessToken = await getAccessToken(subscriptionKey);
-        await textToSpeech(accessToken, text,voiceName, name);
+        await textToSpeechWithName(accessToken, text,voiceName, name);
     } catch (err) {
         console.log(`Something went wrong: ${err}`);
     }

@@ -250,17 +250,43 @@ const getTaskStatByDay = (res,day) => {
   const allByDay = tasksModel.find( { day: day } ).exec();
   allByDay.then( all => {
 
-      console.log(all);
+    //  console.log(all);
       const doneByDay = all.filter( task => task.done === 'true' || task.done === true );
+
+      const byPriority0 = all.filter( task => task.priority === 0 );
+      const byPriority0Done = byPriority0.filter( task => task.done === 'true' || task.done === true );
+      const byPriority1 = all.filter( task => task.priority === 1 );
+      const byPriority1Done = byPriority1.filter( task => task.done === 'true' || task.done === true );
+      const byPriority2 = all.filter( task => task.priority === 2 );
+      const byPriority2Done = byPriority2.filter( task => task.done === 'true' || task.done === true );
+
+      res.statusCode = 200;
 
       res.json( {
           tasksStat: {
-              all: all.length,
-              done: doneByDay.length
+              allTasks: {
+                  all: all.length,
+                  done: doneByDay.length,
+              },
+              priority0: {
+                 all: byPriority0.length,
+                  done: byPriority0Done.length
+              },
+              priority1: {
+                  all: byPriority1.length,
+                  done: byPriority1Done.length
+              },
+              priority2: {
+                  all: byPriority2.length,
+                  done: byPriority2Done.length
+              }
           }
       } );
 
-  } ).catch( err => console.log(err) );
+  } ).catch( err => {
+      res.statusCode = 400;
+      res.send();
+  } );
 
 
 };
