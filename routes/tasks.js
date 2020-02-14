@@ -207,12 +207,12 @@ const getAllMongoose = async (res) => {
 };
 
 const setDoneMongoose = async (id) => {
-    const doc = await tasksModel.findOneAndUpdate({id: id},{done: true});
+    const doc = await tasksModel.findOneAndUpdate({_id: id},{done: true});
     console.log(doc);
 };
 
 const setUndoneMongoose = async (id) => {
-    const doc = await tasksModel.findOneAndUpdate({id: id},{done: false});
+    const doc = await tasksModel.findOneAndUpdate({_id: id},{done: false});
     console.log(doc);
 };
 
@@ -245,7 +245,7 @@ const getTasksByDayMongoose = async (day,res) => {
 }
 
 const deleteTaskMongoose = async (id,taskObject) => {
-    const promise =  tasksModel.deleteOne({id: id},taskObject, err => {
+    const promise =  tasksModel.deleteOne({_id: id},taskObject, err => {
         if (err) throw new Error();
     });
 };
