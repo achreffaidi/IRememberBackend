@@ -1240,6 +1240,26 @@ router.get('/score/last',(req,res)=>{
     scoreService.getLastestScore(res);
 });
 
+router.delete('/personDelete',(req,res)=>{
+
+    const options = {
+        uri: process.env.FACE_API_HOST+'persongroups/friends/persons/'+req.headers.personid,
+        headers: {
+            'Ocp-Apim-Subscription-Key' : process.env.FACE_API_KEY
+        }
+    };
+
+    request.delete(options, (err, resp, body) => {
+        if(body)
+            body=JSON.parse(body);
+        else
+            body="";
+        res.status(resp.statusCode).json(body);
+
+    });
+});
+
+
 
 router.post('/persons/prepare',(req,res)=>{
     faceService.getPersonNameAndUserdata(req.body, res);

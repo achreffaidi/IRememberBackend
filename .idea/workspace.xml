@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="83cf076e-4dd3-4aec-832d-9bfc08b799a2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/tasks.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/tasks.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -106,15 +105,15 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="env" value="64" />
-          <entry key="js" value="6144" />
-          <entry key="txt" value="465" />
+          <entry key="js" value="6281" />
+          <entry key="txt" value="482" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key=".env file" value="64" />
-          <entry key="JavaScript" value="6144" />
-          <entry key="PLAIN_TEXT" value="465" />
+          <entry key="JavaScript" value="6281" />
+          <entry key="PLAIN_TEXT" value="482" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -175,11 +174,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/tasks.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="242" column="17" lean-forward="true" selection-start-line="242" selection-start-column="17" selection-end-line="242" selection-end-column="17" />
+            <state relative-caret-position="3281">
+              <caret line="242" column="17" selection-start-line="242" selection-start-column="17" selection-end-line="242" selection-end-column="17" />
               <folding>
                 <element signature="n#!!block;n#getAccessToken#0" />
                 <element signature="n#!!block;n#textToSpeech#0" />
@@ -227,8 +226,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/memories.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="629">
-              <caret line="65" selection-start-line="65" selection-end-line="65" />
+            <state relative-caret-position="986">
+              <caret line="86" column="20" selection-start-line="86" selection-start-column="8" selection-end-line="86" selection-end-column="20" />
               <folding>
                 <element signature="e#607#1311#0" />
               </folding>
@@ -236,20 +235,23 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/routes/contacts.js">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/routes/index.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="374">
-              <caret line="22" column="20" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="20" />
+              <caret line="1126" column="26" selection-start-line="1126" selection-start-column="26" selection-end-line="1126" selection-end-column="26" />
+              <folding>
+                <element signature="e#39890#41495#0" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/routes/index.js">
+        <entry file="file://$PROJECT_DIR$/routes/faceService.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="8942">
-              <caret line="526" column="8" selection-start-line="526" selection-start-column="8" selection-end-line="526" selection-end-column="8" />
+            <state relative-caret-position="-581">
+              <caret line="187" column="2" selection-start-line="187" selection-start-column="2" selection-end-line="187" selection-end-column="2" />
             </state>
           </provider>
         </entry>
@@ -288,6 +290,7 @@
       <find>getAll</find>
       <find>addTask</find>
       <find>voiceModel</find>
+      <find>delete</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -305,9 +308,10 @@
         <option value="$PROJECT_DIR$/routes/contacts.js" />
         <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/routes/score.js" />
-        <option value="$PROJECT_DIR$/routes/index.js" />
         <option value="$PROJECT_DIR$/routes/speech.js" />
         <option value="$PROJECT_DIR$/routes/tasks.js" />
+        <option value="$PROJECT_DIR$/routes/index.js" />
+        <option value="$PROJECT_DIR$/routes/faceService.js" />
       </list>
     </option>
   </component>
@@ -537,11 +541,25 @@
       <option name="project" value="LOCAL" />
       <updated>1581628020443</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="add create person">
+      <created>1581947282041</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1581947282041</updated>
+    </task>
+    <task id="LOCAL-00020" summary="add create person">
+      <created>1581947310134</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1581947310134</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="131015000" />
+    <option name="totallyTimeSpent" value="132192000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -561,7 +579,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32907802" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.40591398" side_tool="true" weight="0.31133428" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.59408605" visible="true" weight="0.30496454" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.59408605" visible="true" weight="0.30921987" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -613,7 +631,8 @@
     <MESSAGE value="update tasks statistics" />
     <MESSAGE value="add category to tasks" />
     <MESSAGE value="fix create tasks" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix create tasks" />
+    <MESSAGE value="add create person" />
+    <option name="LAST_COMMIT_MESSAGE" value="add create person" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/node_modules/express/lib/router/route.js">
@@ -673,8 +692,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/tasks.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="242" column="17" lean-forward="true" selection-start-line="242" selection-start-column="17" selection-end-line="242" selection-end-column="17" />
+        <state relative-caret-position="3281">
+          <caret line="242" column="17" selection-start-line="242" selection-start-column="17" selection-end-line="242" selection-end-column="17" />
           <folding>
             <element signature="n#!!block;n#getAccessToken#0" />
             <element signature="n#!!block;n#textToSpeech#0" />
@@ -714,8 +733,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/memories.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="65" selection-start-line="65" selection-end-line="65" />
+        <state relative-caret-position="986">
+          <caret line="86" column="20" selection-start-line="86" selection-start-column="8" selection-end-line="86" selection-end-column="20" />
           <folding>
             <element signature="e#607#1311#0" />
           </folding>
@@ -729,10 +748,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/routes/faceService.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-581">
+          <caret line="187" column="2" selection-start-line="187" selection-start-column="2" selection-end-line="187" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/routes/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8942">
-          <caret line="526" column="8" selection-start-line="526" selection-start-column="8" selection-end-line="526" selection-end-column="8" />
+        <state relative-caret-position="374">
+          <caret line="1126" column="26" selection-start-line="1126" selection-start-column="26" selection-end-line="1126" selection-end-column="26" />
+          <folding>
+            <element signature="e#39890#41495#0" />
+          </folding>
         </state>
       </provider>
     </entry>
