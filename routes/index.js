@@ -16,6 +16,7 @@ const photosgameService = require('./photosgame');
 const stateService=require('./phoneState');
 const emergencyService =require('./emergencyNumber');
 const contactsService = require('./contacts');
+const faceService = require('./faceService');
 
 
 
@@ -1238,5 +1239,28 @@ router.get('/tasks/statByDay/:day',(req,res)=>{
 router.get('/score/last',(req,res)=>{
     scoreService.getLastestScore(res);
 });
+
+
+router.post('/persons/prepare',(req,res)=>{
+    faceService.getPersonNameAndUserdata(req.body, res);
+});
+
+
+router.post('/persons/image1',(req,res)=>{
+    faceService.uploadPhoto1(res, req);
+});
+
+router.post('/persons/image2',(req,res)=>{
+    faceService.uploadPhoto2(res, req);
+});
+
+router.post('/persons/image3',(req,res)=>{
+    faceService.uploadPhoto3(res, req);
+});
+
+router.post('/persons/add',(req,res)=>{
+    faceService.addPerson(req,res);
+});
+
 
 module.exports = router;
