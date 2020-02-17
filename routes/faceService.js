@@ -187,7 +187,6 @@ const addPerson = (req, res) => {
 
 };
 
-
 const trainImage = (personId,imageUrl) => {
 
     const  options = {
