@@ -104,8 +104,9 @@ const textToSpeechForIdentification  = (accessToken, res, person) => {
 };
 
 
-const textToSpeech  = (accessToken, res, text,voice) => {
-    if (typeof voice === 'undefined')
+const textToSpeech  = async (accessToken, res, text) => {
+
+    /*if (typeof voice === 'undefined')
     {
         voice = {
             "Name": "Microsoft Server Speech Text to Speech Voice (en-GB, George, Apollo)",
@@ -115,7 +116,8 @@ const textToSpeech  = (accessToken, res, text,voice) => {
             "SampleRateHertz": "16000",
             "VoiceType": "Standard"
         };
-    }
+    }*/
+    Voice.findOne({SampleRateHertz: '16000'}).exec().then(voice=>{
     try {
         // Create the SSML request.
         let xml_body = xmlbuilder.create('speak')
@@ -143,7 +145,7 @@ const textToSpeech  = (accessToken, res, text,voice) => {
                 'Content-Type': 'application/ssml+xml'
             },
             body: body
-        }
+        };
 
 
         const speechName = 'game'+ index + '.mp3';
@@ -172,7 +174,11 @@ const textToSpeech  = (accessToken, res, text,voice) => {
     }catch (e) {
         console.log(e);
     }
-}
+    }).catch(err =>{
+        console.log(err);
+        res.status(500).send(err);
+    })
+};
 
 const listOfVoices = (req,res) => {
 
@@ -266,6 +272,7 @@ const findVoice = (voiceShortname,res) =>{
     });
 
 };
+
 const getVoice =  (res)=>{
     Voice.findOne({SampleRateHertz: '16000'}).exec().then(docs=>{
         res.status(200).send(docs.ShortName);
@@ -274,8 +281,6 @@ const getVoice =  (res)=>{
         res.status(500).send(err);
     })
 };
-
-
 
 
 
