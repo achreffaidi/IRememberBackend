@@ -143,11 +143,12 @@
           <entry key="project.open.time.27" value="1" />
           <entry key="project.open.time.31" value="1" />
           <entry key="project.open.time.32" value="1" />
+          <entry key="project.open.time.33" value="1" />
           <entry key="project.open.time.39" value="1" />
           <entry key="project.open.time.41" value="1" />
           <entry key="project.open.time.55" value="1" />
           <entry key="project.open.time.71" value="1" />
-          <entry key="project.opened" value="10" />
+          <entry key="project.opened" value="11" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -166,12 +167,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="js" value="909" />
+          <entry key="js" value="912" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JavaScript" value="909" />
+          <entry key="JavaScript" value="912" />
         </counts>
       </usages-collector>
     </session>
@@ -190,8 +191,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/routes/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="344">
-              <caret line="286" column="51" selection-start-line="286" selection-start-column="51" selection-end-line="286" selection-end-column="51" />
+            <state relative-caret-position="225">
+              <caret line="279" column="36" lean-forward="true" selection-start-line="279" selection-start-column="36" selection-end-line="279" selection-end-column="36" />
             </state>
           </provider>
         </entry>
@@ -205,7 +206,7 @@
         <entry file="file://$PROJECT_DIR$/routes/phoneState.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="323">
-              <caret line="19" column="6" lean-forward="true" selection-start-line="19" selection-start-column="6" selection-end-line="19" selection-end-column="6" />
+              <caret line="19" column="6" selection-start-line="19" selection-start-column="6" selection-end-line="19" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -214,7 +215,7 @@
         <entry file="file://$PROJECT_DIR$/routes/location.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="680">
-              <caret line="40" column="24" lean-forward="true" selection-start-line="40" selection-start-column="24" selection-end-line="40" selection-end-column="24" />
+              <caret line="40" column="24" selection-start-line="40" selection-start-column="24" selection-end-line="40" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -355,7 +356,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -372,6 +372,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -429,7 +430,8 @@
       <workItem from="1581693204450" duration="412000" />
       <workItem from="1582057390287" duration="1148000" />
       <workItem from="1582111404039" duration="1337000" />
-      <workItem from="1582209528011" duration="578000" />
+      <workItem from="1582209528011" duration="1178000" />
+      <workItem from="1582274900452" duration="23000" />
     </task>
     <task id="LOCAL-00001" summary="change task structure, add priority and voice link">
       <created>1581253735688</created>
@@ -575,13 +577,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="143883000" />
+    <option name="totallyTimeSpent" value="144506000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="0" width="974" height="1047" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.123931624" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.123931624" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -595,7 +597,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32907802" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.40591398" side_tool="true" weight="0.31133428" />
-      <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.59408605" visible="true" weight="0.3044907" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" sideWeight="0.59408605" visible="true" weight="0.3044907" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -719,14 +721,14 @@
     <entry file="file://$PROJECT_DIR$/routes/phoneState.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
-          <caret line="19" column="6" lean-forward="true" selection-start-line="19" selection-start-column="6" selection-end-line="19" selection-end-column="6" />
+          <caret line="19" column="6" selection-start-line="19" selection-start-column="6" selection-end-line="19" selection-end-column="6" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/location.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="680">
-          <caret line="40" column="24" lean-forward="true" selection-start-line="40" selection-start-column="24" selection-end-line="40" selection-end-column="24" />
+          <caret line="40" column="24" selection-start-line="40" selection-start-column="24" selection-end-line="40" selection-end-column="24" />
         </state>
       </provider>
     </entry>
@@ -766,8 +768,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="344">
-          <caret line="286" column="51" selection-start-line="286" selection-start-column="51" selection-end-line="286" selection-end-column="51" />
+        <state relative-caret-position="225">
+          <caret line="279" column="36" lean-forward="true" selection-start-line="279" selection-start-column="36" selection-end-line="279" selection-end-column="36" />
         </state>
       </provider>
     </entry>
