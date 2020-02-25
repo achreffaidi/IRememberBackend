@@ -91,7 +91,7 @@ const getLastestScore = (res) => {
         //console.log(data);
         res.statusCode = 200;
         res.json( {
-            lastScore: data[0]
+            lastScore: data[data.length]
         } );
     } ).catch( err => {
         //console.log(err);
