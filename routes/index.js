@@ -524,7 +524,7 @@ router.post('/addTask', function(req, res, next) {
 
     try {
 
-        var {title, description, withimage, time, category, day} = req.headers;
+        var {title, description, withimage, time, category, day, priority} = req.headers;
       //  console.log(req.headers);
         console.log(withimage);
 
@@ -533,7 +533,8 @@ router.post('/addTask', function(req, res, next) {
             description: description,
             time: time,
             category: category,
-            day: day
+            day: day,
+            priority: priority
         };
 
         if (withimage === 'false' || withimage === false ) {
