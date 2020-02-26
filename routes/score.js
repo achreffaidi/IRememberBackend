@@ -58,7 +58,9 @@ const addScore = (questionsNumber, correct,date,res) => {
 
 const getAllScores = async (res) => {
 
-    const query = scoreModel.find().limit(10);
+    const cutoff = new Date();
+    cutoff.setDate(cutoff.getDate()-10);
+    const query = scoreModel.find({date: {$lt: cutoff}}).limit(10);
     const promise = query.exec();
     promise.then(data => {
         var scoreList = [];

@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="83cf076e-4dd3-4aec-832d-9bfc08b799a2" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/score.js" beforeDir="false" afterPath="$PROJECT_DIR$/routes/score.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -106,15 +106,15 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="env" value="64" />
-          <entry key="js" value="6282" />
-          <entry key="txt" value="482" />
+          <entry key="js" value="6337" />
+          <entry key="txt" value="513" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key=".env file" value="64" />
-          <entry key="JavaScript" value="6282" />
-          <entry key="PLAIN_TEXT" value="482" />
+          <entry key="JavaScript" value="6337" />
+          <entry key="PLAIN_TEXT" value="513" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -178,8 +178,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/tasks.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3281">
-              <caret line="242" column="17" selection-start-line="242" selection-start-column="17" selection-end-line="242" selection-end-column="17" />
+            <state relative-caret-position="238">
+              <caret line="226" column="7" selection-start-line="226" selection-start-column="7" selection-end-line="226" selection-end-column="7" />
               <folding>
                 <element signature="n#!!block;n#getAccessToken#0" />
                 <element signature="n#!!block;n#textToSpeech#0" />
@@ -188,11 +188,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/routes/score.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="952">
-              <caret line="56" column="2" selection-start-line="56" selection-start-column="2" selection-end-line="56" selection-end-column="2" />
+            <state relative-caret-position="187">
+              <caret line="59" lean-forward="true" selection-start-line="59" selection-end-line="59" />
             </state>
           </provider>
         </entry>
@@ -236,11 +236,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="535" column="21" lean-forward="true" selection-start-line="535" selection-start-column="21" selection-end-line="535" selection-end-column="21" />
+            <state relative-caret-position="136">
+              <caret line="486" column="21" selection-start-line="486" selection-start-column="13" selection-end-line="486" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -285,11 +285,13 @@
       <find>tasksImage</find>
       <find>textToSpeech</find>
       <find>by</find>
-      <find>getAll</find>
       <find>addTask</find>
       <find>voiceModel</find>
       <find>delete</find>
       <find>task</find>
+      <find>getAll</find>
+      <find>getByDay</find>
+      <find>getAllMongoose</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -306,11 +308,11 @@
         <option value="$PROJECT_DIR$/routes/phoneState.js" />
         <option value="$PROJECT_DIR$/routes/contacts.js" />
         <option value="$PROJECT_DIR$/.env" />
-        <option value="$PROJECT_DIR$/routes/score.js" />
         <option value="$PROJECT_DIR$/routes/speech.js" />
-        <option value="$PROJECT_DIR$/routes/tasks.js" />
         <option value="$PROJECT_DIR$/routes/faceService.js" />
         <option value="$PROJECT_DIR$/routes/index.js" />
+        <option value="$PROJECT_DIR$/routes/tasks.js" />
+        <option value="$PROJECT_DIR$/routes/score.js" />
       </list>
     </option>
   </component>
@@ -667,11 +669,25 @@
       <option name="project" value="LOCAL" />
       <updated>1581947310134</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="fix priority">
+      <created>1582753316452</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1582753316452</updated>
+    </task>
+    <task id="LOCAL-00022" summary="sort tasks by time">
+      <created>1582754854922</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1582754854922</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="132241000" />
+    <option name="totallyTimeSpent" value="134578000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -744,7 +760,9 @@
     <MESSAGE value="add category to tasks" />
     <MESSAGE value="fix create tasks" />
     <MESSAGE value="add create person" />
-    <option name="LAST_COMMIT_MESSAGE" value="add create person" />
+    <MESSAGE value="fix priority" />
+    <MESSAGE value="sort tasks by time" />
+    <option name="LAST_COMMIT_MESSAGE" value="sort tasks by time" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/node_modules/express/lib/router/route.js">
@@ -802,24 +820,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/tasks.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3281">
-          <caret line="242" column="17" selection-start-line="242" selection-start-column="17" selection-end-line="242" selection-end-column="17" />
-          <folding>
-            <element signature="n#!!block;n#getAccessToken#0" />
-            <element signature="n#!!block;n#textToSpeech#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/routes/score.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="952">
-          <caret line="56" column="2" selection-start-line="56" selection-start-column="2" selection-end-line="56" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/routes/photosgame.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
@@ -869,8 +869,26 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/routes/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="535" column="21" lean-forward="true" selection-start-line="535" selection-start-column="21" selection-end-line="535" selection-end-column="21" />
+        <state relative-caret-position="136">
+          <caret line="486" column="21" selection-start-line="486" selection-start-column="13" selection-end-line="486" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/tasks.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="226" column="7" selection-start-line="226" selection-start-column="7" selection-end-line="226" selection-end-column="7" />
+          <folding>
+            <element signature="n#!!block;n#getAccessToken#0" />
+            <element signature="n#!!block;n#textToSpeech#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/score.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="59" lean-forward="true" selection-start-line="59" selection-end-line="59" />
         </state>
       </provider>
     </entry>
