@@ -87,13 +87,13 @@ const getAllScores = async (res) => {
 
 const getLastestScore = (res) => {
 
-    const p = scoreModel.find().sort(  'date' ).exec();
+    const p = scoreModel.find().sort(  {date: -1} ).exec();
 
     p.then( data => {
         //console.log(data);
         res.statusCode = 200;
         res.json( {
-            lastScore: data[data.length - 1]
+            lastScore: data[0]
         } );
     } ).catch( err => {
         //console.log(err);
