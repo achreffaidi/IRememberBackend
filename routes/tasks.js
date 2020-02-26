@@ -180,9 +180,10 @@ const addMongoose = async (taskObject) => {
 };
 
 const getAllMongoose = async (res) => {
+    console.log('getAll');
     var tasksByDay = [];
 
-    const query = tasksModel.find();
+    const query = tasksModel.find().sort({time: 1});
     const p = query.exec();
     p.then(data => {
       //  console.log(data);
@@ -220,10 +221,10 @@ const getTasksByDayMongoose = async (day,res) => {
 
     var tasksByDay = [];
 
-    const query = tasksModel.find({day: day});
+    const query = tasksModel.find({day: day}).sort({time: 1});
     const p = query.exec();
     p.then(data => {
-        console.log(data);
+     //   console.log(data);
 
         data.forEach(task => {
 
